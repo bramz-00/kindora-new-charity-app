@@ -29,17 +29,32 @@ class AuthService
         return $user;
     }
 
+
     public function login(LoginRequest $request): User
     {
-        if (!Auth::attempt($request->only('email', 'password'))) {
-            abort(401, 'Invalid credentials');
+        $user = User::where('email', $request->input('email'))->first();
+    
+        if (!$user) {
+            abort(404, 'Aucun utilisateur trouvé avec cet e-mail.');
         }
-
-        $user = Auth::user();
+    
+        if (!Hash::check($request->input('password'), $user->password)) {
+            abort(401, 'Mot de passe incorrect.');
+        }
+    
+        // // Optionnel : vérifier si l'email est vérifié
+        // if (!$user->hasVerifiedEmail()) {
+        //     abort(403, 'Veuillez vérifier votre adresse e-mail.');
+        // }
+    
+        // Supprimer les anciens tokens si tu veux garder 1 session à la fois
+        $user->tokens()->delete();
+    
         $user->token = $user->createToken('access_token')->plainTextToken;
-
+    
         return $user;
     }
+    
 
     public function logout(Request $request): void
     {
