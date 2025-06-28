@@ -50,6 +50,52 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_active' => 'boolean',
+            'birth_date' => 'date',
+
         ];
     }
+
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+    public function scopeInactive($query)
+    {
+        return $query->where('is_active', false);
+    }
+    public function scopeSearch($query, $search)
+    {
+        return $query->where(function ($q) use ($search) {
+            $q->where('email', 'LIKE', "%{$search}%")
+              ->orWhere('first_name', 'LIKE', "%{$search}%")
+              ->orWhere('last_name', 'LIKE', "%{$search}%");
+        });
+    }
+
+
+        /**
+     * Get the user's avatar URL.
+     */
+    public function getAvatarUrlAttribute(): ?string
+    {
+        return $this->avatar_path ? \Storage::disk('public')->url($this->avatar_path) : null;
+    }
+
+    /**
+     * Check if user is active.
+     */
+    public function isActive(): bool
+    {
+        return $this->is_active;
+    }
+
+    // /**
+    //  * Check if user is admin.
+    //  */
+    // public function isAdmin(): bool
+    // {
+    //     return $this->role === 'admin';
+    // }
 }

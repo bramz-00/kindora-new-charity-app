@@ -23,11 +23,19 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+
+        $firstName = fake()->firstName();
+        $lastName = fake()->lastName();
+
         return [
-            'name' => fake()->name(),
+            'first_name' => $firstName,
+            'last_name' => $lastName,
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
+            'email_verified_at' => fake()->optional(0.8)->dateTime(),
             'password' => static::$password ??= Hash::make('password'),
+            'phone' => fake()->optional(0.7)->phoneNumber(),
+            'birth_date' => optional(fake()->optional(0.6)->dateTimeBetween('-60 years', '-18 years'))->format('Y-m-d'),
+            'is_active' => fake()->boolean(85),
             'remember_token' => Str::random(10),
         ];
     }
@@ -37,8 +45,26 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }
+    public function inactive(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            'is_active' => false,
+        ]);
+    }
+
+    /**
+     * Indicate that the user should be active.
+     */
+    public function active(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            'is_active' => true,
+        ]);
+    }
 }
+
+

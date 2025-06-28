@@ -1,8 +1,8 @@
 <?php
-namespace App\Repositories\User;
+namespace App\Repositories\Organisation;
 
 use App\Models\User;
-class UserRepository
+class OrganisationRepository
 {
     public function create(array $data): User
     {
