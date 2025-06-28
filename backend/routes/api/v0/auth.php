@@ -20,7 +20,6 @@ Route::prefix("auth")->group(
         Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::get('/user', [AuthController::class, 'me']);
             Route::post('/logout', [AuthController::class, 'logout']);
-            Route::apiResource('users', UserController::class);
         });
     }
 
