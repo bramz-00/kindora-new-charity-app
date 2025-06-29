@@ -6,63 +6,48 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Organisation\StoreOrganisationRequest;
 use App\Http\Requests\Organisation\UpdateOrganisationRequest;
+use App\Http\Resources\OrganisationRessource;
 use App\Models\Organisation;
+use App\Services\Organisation\OrganisationService;
 
 class OrganisationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(protected OrganisationService $organisationService)
+    {
+    }
+
     public function index()
     {
-        //
+  
+        return OrganisationRessource::collection($this->organisationService->all());
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreOrganisationRequest $request)
     {
-        //
+        $data = $request->validated();
+        $organisation = $this->organisationService->create($data);
+        return new OrganisationRessource($organisation);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Organisation $organisation)
+    public function show($id)
     {
-        //
+        return response()->json($this->organisationService->find($id));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Organisation $organisation)
+    public function update(UpdateOrganisationRequest $request, $id)
     {
-        //
+        $data = $request->validated();
+        $organisation = $this->organisationService->update($id, $data);
+        return new OrganisationRessource($organisation);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateOrganisationRequest $request, Organisation $organisation)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Organisation $organisation)
-    {
-        //
+        $this->organisationService->delete($id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Organisation deleted successfully'
+        ]);
     }
 }

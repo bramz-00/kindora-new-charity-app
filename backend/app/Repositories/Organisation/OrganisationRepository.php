@@ -1,31 +1,34 @@
 <?php
 namespace App\Repositories\Organisation;
 
-use App\Models\User;
-class OrganisationRepository
+use App\Models\Organisation;
+class OrganisationRepository implements OrganisationRepositoryInterface
 {
-    public function create(array $data): User
+    public function all()
     {
-        $data['password'] = bcrypt($data['password']);
-        return User::create($data);
+        return Organisation::all();
     }
 
     public function find($id)
     {
-        return User::findOrFail($id);
+        return Organisation::findOrFail($id);
     }
 
-    public function update(User $user, array $data)
+    public function create(array $data)
     {
-        if (isset($data['password'])) {
-            $data['password'] = bcrypt($data['password']);
-        }
-        $user->update($data);
-        return $user;
+        return Organisation::create($data);
     }
 
-    public function delete(User $user)
+    public function update($id, array $data)
     {
-        return $user->delete();
+        $organisation = $this->find($id);
+        $organisation->update($data);
+        return $organisation;
+    }
+
+    public function delete($id)
+    {
+        $organisation = $this->find($id);
+        return $organisation->delete();
     }
 }
