@@ -7,63 +7,47 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Good\StoreGoodRequest;
 use App\Http\Requests\Good\UpdateGoodRequest;
-use App\Models\Good;
+use App\Http\Resources\GoodRessource;
+use App\Services\Good\GoodService;
 
 class GoodController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(protected GoodService $goodService)
+    {
+    }
+
     public function index()
     {
-        //
+  
+        return GoodRessource::collection($this->goodService->all());
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreGoodRequest $request)
     {
-        //
+        $data = $request->validated();
+        $good = $this->goodService->create($data);
+        return new GoodRessource($good);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Good $good)
+    public function show($id)
     {
-        //
+        return response()->json($this->goodService->find($id));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Good $good)
+    public function update(UpdateGoodRequest $request, $id)
     {
-        //
+        $data = $request->validated();
+        $good = $this->goodService->update($id, $data);
+        return new GoodRessource($good);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateGoodRequest $request, Good $good)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Good $good)
-    {
-        //
+        $this->goodService->delete($id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Good deleted successfully'
+        ]);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Good\GoodRepository;
+use App\Repositories\Good\GoodRepositoryInterface;
 use App\Repositories\Organisation\OrganisationRepository;
 use App\Repositories\Organisation\OrganisationRepositoryInterface;
 use App\Repositories\User\UserRepository;
@@ -17,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(OrganisationRepositoryInterface::class, OrganisationRepository::class);
+        $this->app->bind(GoodRepositoryInterface::class, GoodRepository::class);
 
     }
 
