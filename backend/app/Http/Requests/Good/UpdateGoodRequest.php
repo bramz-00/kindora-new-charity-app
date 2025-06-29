@@ -22,7 +22,16 @@ class UpdateGoodRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string|unique:goods,title,' . $this->good,
+            'description' => 'required|string',
+            'slug' => 'required|string|unique:goods,slug,' . $this->good,
+            'state' => 'in:new,used',
+            'type' => 'in:donation,exchange',
+            'status' => 'in:available,reserved,unavailable',
+            'exchange_condition' => 'nullable|string',
+            'owner_id' => 'required|exists:users,id',
+            'category_id' => 'required|exists:categories,id',
+            'is_active' => 'boolean',
         ];
     }
 }

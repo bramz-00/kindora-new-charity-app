@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\v0\Admin\UserController;
+use App\Http\Controllers\v0\Features\GoodController;
 use App\Http\Controllers\v0\Features\OrganisationController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,12 @@ Route::middleware('auth:sanctum')->prefix("admin")->group(
         //Organisations
         Route::apiResource('organisation', OrganisationController::class);
         Route::prefix('organisations')->group(function () {
+        });
+
+
+        //Goods
+        Route::apiResource('good', GoodController::class);
+        Route::prefix('goods')->group(function () {
         });
     }
 );
