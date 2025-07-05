@@ -1,7 +1,10 @@
 <?php
 use App\Http\Controllers\v0\Admin\UserController;
+use App\Http\Controllers\v0\Features\EventController;
 use App\Http\Controllers\v0\Features\GoodController;
+use App\Http\Controllers\v0\Features\JackpotController;
 use App\Http\Controllers\v0\Features\OrganisationController;
+use App\Http\Controllers\v0\Features\VolunteerOpportunityController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -45,6 +48,19 @@ Route::middleware('auth:sanctum')->prefix("admin")->group(
         //Goods
         Route::apiResource('good', GoodController::class);
         Route::prefix('goods')->group(function () {
+        });
+
+        //Events
+        Route::apiResource('event', EventController::class);
+        Route::prefix('events')->group(function () {
+        });
+        //Jackpots
+        Route::apiResource('jackpot', JackpotController::class);
+        Route::prefix('jackpots')->group(function () {
+        });
+        //Volunteer_Opportunities
+        Route::apiResource('volunteerOpportunity', VolunteerOpportunityController::class);
+        Route::prefix('volunteerOpportunities')->group(function () {
         });
     }
 );
