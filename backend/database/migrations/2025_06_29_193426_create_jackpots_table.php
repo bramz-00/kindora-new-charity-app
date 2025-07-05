@@ -13,6 +13,21 @@ return new class extends Migration
     {
         Schema::create('jackpots', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('organisation_id');
+            $table->unsignedBigInteger( 'created_by_id');
+
+            $table->foreign('organisation_id')->on("organisations")->references("id")->onDelete("cascade");
+            $table->foreign('created_by_id')->on("users")->references("id")->onDelete("cascade");
+            
+            $table->string('title');
+            $table->text('description');
+            $table->decimal('target_amount',10,2);
+            $table->decimal('collected_amount',10,2);
+            $table->date('start_date')->nullable();
+            $table->date('ends_at')->nullable();
+            $table->string('status')->default('open');
+            $table->boolean('is_active')->default( true);
+
             $table->timestamps();
         });
     }

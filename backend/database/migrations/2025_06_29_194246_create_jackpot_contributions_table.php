@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('jackpot_contributions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger( 'jackpot_id');
+            $table->unsignedBigInteger( 'user_id');
+
+            $table->foreign('jackpot_id')->on("jackpots")->references("id")->onDelete("cascade");
+            $table->foreign('user_id')->on("users")->references("id")->onDelete("cascade");
+            
+            $table->decimal( 'amount',10,2);
             $table->timestamps();
         });
     }

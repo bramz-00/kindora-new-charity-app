@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('volunteer_applications', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger( 'volunteer_opportunity_id');
+            $table->unsignedBigInteger( 'user_id');
+            
+            $table->foreign('volunteer_opportunity_id')->on("volunteer_opportunities")->references("id")->onDelete("cascade");
+            $table->foreign('user_id')->on("users")->references("id")->onDelete("cascade");
             $table->timestamps();
         });
     }

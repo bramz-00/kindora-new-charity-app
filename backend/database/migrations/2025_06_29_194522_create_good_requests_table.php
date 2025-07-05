@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('good_requests', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger( 'good_id');
+            $table->unsignedBigInteger( 'user_id');
+            $table->unsignedBigInteger( 'exchange_good_id')->nullable();
+
+            $table->foreign('good_id')->on("goods")->references("id")->onDelete("cascade");
+            $table->foreign('user_id')->on("users")->references("id")->onDelete("cascade");
+            $table->foreign('exchange_good_id')->on("goods")->references("id")->onDelete("cascade");
+           
+            $table->string( 'status')->default('new');
             $table->timestamps();
         });
     }
