@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers\v0\Features;
 
 use App\Http\Controllers\Controller;
@@ -27,7 +26,7 @@ class GoodController extends Controller
     public function store(StoreGoodRequest $request)
     {
         $data = $request->validated();
-        return new GoodResource($this->goodService->create($data););
+        return new GoodResource($this->goodService->create($data));
     }
 
     public function show($good)
