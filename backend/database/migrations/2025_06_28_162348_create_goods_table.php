@@ -26,6 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->on("categories")->references("id")->onDelete("cascade");
             $table->boolean('is_active')->default(true);
+            $table->softDeletes(); 
             $table->timestamps();
         });
     }

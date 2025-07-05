@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreign('exchange_good_id')->on("goods")->references("id")->onDelete("cascade");
            
             $table->string( 'status')->default('new');
+            $table->softDeletes(); 
             $table->timestamps();
         });
     }

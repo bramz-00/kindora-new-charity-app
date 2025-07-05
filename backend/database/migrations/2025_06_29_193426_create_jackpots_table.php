@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->foreign('organisation_id')->on("organisations")->references("id")->onDelete("cascade");
             $table->foreign('created_by_id')->on("users")->references("id")->onDelete("cascade");
-            
+
             $table->string('title');
             $table->text('description');
             $table->decimal('target_amount',10,2);
@@ -27,6 +27,7 @@ return new class extends Migration
             $table->date('ends_at')->nullable();
             $table->string('status')->default('open');
             $table->boolean('is_active')->default( true);
+            $table->softDeletes(); 
 
             $table->timestamps();
         });

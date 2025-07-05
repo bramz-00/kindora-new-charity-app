@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreign('user_id')->on("users")->references("id")->onDelete("cascade");
             
             $table->decimal( 'amount',10,2);
+            $table->softDeletes(); 
             $table->timestamps();
         });
     }

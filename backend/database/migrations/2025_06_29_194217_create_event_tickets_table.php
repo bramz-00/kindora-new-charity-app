@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger( 'event_id');
             $table->foreign('event_id')->on("events")->references("id")->onDelete("cascade");
-            
+
             $table->string( 'name')->nullable();
             $table->decimal( 'price',8,2)->default(0);
             $table->integer( 'quantity')->default(0);
             $table->integer( 'sold_count')->default(0);
+            $table->softDeletes(); 
             $table->timestamps();
         });
     }

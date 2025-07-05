@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger( 'event_ticket_id');
             $table->unsignedBigInteger( 'user_id');
-            
+
             $table->foreign('event_ticket_id')->on("event_tickets")->references("id")->onDelete("cascade");
             $table->foreign('user_id')->on("users")->references("id")->onDelete("cascade");
 
@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('status')->default('pending');
             $table->string('payment_method')->default('online');
             $table->dateTime("purchased_at")->nullable();
+            $table->softDeletes(); 
             $table->timestamps();
         });
     }

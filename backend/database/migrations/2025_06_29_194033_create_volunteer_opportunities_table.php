@@ -26,6 +26,7 @@ return new class extends Migration
             $table->date('end_date')->nullable();
             $table->string('status')->default('open');
             $table->boolean('is_active')->default( true);
+            $table->softDeletes(); 
             $table->timestamps();
         });
     }

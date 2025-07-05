@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('status')->default('open');//public, private
             $table->string('type')->default('public');
             $table->boolean('is_active')->default( true);
+            $table->softDeletes(); 
             $table->timestamps();
         });
     }

@@ -28,6 +28,7 @@ return new class extends Migration
             $table->boolean('is_active')->default( true);
             $table->unsignedBigInteger('president_id');
             $table->foreign('president_id')->on("users")->references("id")->onDelete("cascade");
+            $table->softDeletes(); 
             $table->timestamps();
         });
     }
