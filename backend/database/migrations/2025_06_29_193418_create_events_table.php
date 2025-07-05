@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('organisation_id')->on("organisations")->references("id")->onDelete("cascade");
             $table->foreign('created_by_id')->on("users")->references("id")->onDelete("cascade");
             
-            $table->string('title');
+            $table->string('title')->unique();
             $table->text('description');
             $table->string('location');
             $table->date('start_date')->nullable();

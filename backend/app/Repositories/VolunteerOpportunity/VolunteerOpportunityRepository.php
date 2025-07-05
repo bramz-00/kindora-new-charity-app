@@ -9,9 +9,9 @@ class VolunteerOpportunityRepository implements VolunteerOpportunityRepositoryIn
         return VolunteerOpportunity::all();
     }
 
-    public function find($id)
+    public function find($volunteerOpportunity)
     {
-        return VolunteerOpportunity::findOrFail($id);
+        return $volunteerOpportunity;
     }
 
     public function create(array $data)
@@ -19,16 +19,14 @@ class VolunteerOpportunityRepository implements VolunteerOpportunityRepositoryIn
         return VolunteerOpportunity::create($data);
     }
 
-    public function update($id, array $data)
+    public function update($volunteerOpportunity, array $data)
     {
-        $volunteerOpportunity = $this->find($id);
         $volunteerOpportunity->update($data);
         return $volunteerOpportunity;
     }
 
-    public function delete($id)
+    public function delete($volunteerOpportunity)
     {
-        $volunteerOpportunity = $this->find($id);
         return $volunteerOpportunity->delete();
     }
 }

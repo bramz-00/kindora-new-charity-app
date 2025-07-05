@@ -9,9 +9,9 @@ class GoodRepository implements GoodRepositoryInterface
         return Good::all();
     }
 
-    public function find($id)
+    public function find($good)
     {
-        return Good::findOrFail($id);
+        return Good::findOrFail($good);
     }
 
     public function create(array $data)
@@ -19,16 +19,14 @@ class GoodRepository implements GoodRepositoryInterface
         return Good::create($data);
     }
 
-    public function update($id, array $data)
+    public function update($good, array $data)
     {
-        $good = $this->find($id);
         $good->update($data);
         return $good;
     }
 
-    public function delete($id)
+    public function delete($good)
     {
-        $good = $this->find($id);
         return $good->delete();
     }
 }

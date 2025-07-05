@@ -9,9 +9,9 @@ class EventRepository implements EventRepositoryInterface
         return Event::all();
     }
 
-    public function find($id)
+    public function find($event)
     {
-        return Event::findOrFail($id);
+        return Event::findOrFail($event);
     }
 
     public function create(array $data)
@@ -19,16 +19,14 @@ class EventRepository implements EventRepositoryInterface
         return Event::create($data);
     }
 
-    public function update($id, array $data)
+    public function update($event, array $data)
     {
-        $event = $this->find($id);
         $event->update($data);
         return $event;
     }
 
-    public function delete($id)
+    public function delete($event)
     {
-        $event = $this->find($id);
         return $event->delete();
     }
 }

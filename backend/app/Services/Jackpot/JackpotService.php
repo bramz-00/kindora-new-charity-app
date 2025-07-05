@@ -17,9 +17,9 @@ class JackpotService
         return $this->repository->all();
     }
 
-    public function find($id)
+    public function find($jackpot)
     {
-        return $this->repository->find($id);
+        return $this->repository->find($jackpot);
     }
 
     public function create(array $data)
@@ -27,14 +27,14 @@ class JackpotService
         return $this->repository->create($data);
     }
 
-    public function update($id, array $data)
+    public function update($jackpot, array $data)
     {
-        return $this->repository->update($id, $data);
+        return $this->repository->update($jackpot, $data);
     }
 
-    public function delete($id)
+    public function delete($jackpot)
     {
-        return $this->repository->delete($id);
+        return $this->repository->delete($jackpot);
     }
 }
 

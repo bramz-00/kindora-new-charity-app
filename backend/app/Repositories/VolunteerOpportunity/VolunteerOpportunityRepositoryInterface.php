@@ -3,11 +3,13 @@
 
 namespace App\Repositories\VolunteerOpportunity;
 
+use App\Models\VolunteerOpportunity;
+
 interface VolunteerOpportunityRepositoryInterface
 {
     public function all();
-    public function find($id);
+    public function find(VolunteerOpportunity $volunteerOpportunity);
     public function create(array $data);
-    public function update($id, array $data);
-    public function delete($id);
+    public function update(VolunteerOpportunity $volunteerOpportunity, array $data);
+    public function delete(VolunteerOpportunity $volunteerOpportunity);
 }

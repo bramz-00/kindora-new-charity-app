@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\VolunteerOpportunity\StoreVolunteerOpportunityRequest;
 use App\Http\Requests\VolunteerOpportunity\UpdateVolunteerOpportunityRequest;
-use App\Http\Resources\VolunteerOpportunityRessource;
+use App\Http\Resources\VolunteerOpportunityResource;
+use App\Models\VolunteerOpportunity;
 use App\Services\VolunteerOpportunity\VolunteerOpportunityService;
 
 class VolunteerOpportunityController extends Controller
@@ -19,7 +20,7 @@ class VolunteerOpportunityController extends Controller
     public function index()
     {
   
-        return VolunteerOpportunityRessource::collection($this->volunteerOpportunityService->all());
+        return VolunteerOpportunityResource::collection($this->volunteerOpportunityService->all());
 
     }
 
@@ -27,7 +28,7 @@ class VolunteerOpportunityController extends Controller
     {
         $data = $request->validated();
         $volunteerOpportunity = $this->volunteerOpportunityService->create($data);
-        return new VolunteerOpportunityRessource($volunteerOpportunity);
+        return new VolunteerOpportunityResource($volunteerOpportunity);
     }
 
     public function show($id)
@@ -35,11 +36,11 @@ class VolunteerOpportunityController extends Controller
         return response()->json($this->volunteerOpportunityService->find($id));
     }
 
-    public function update(UpdateVolunteerOpportunityRequest $request, $id)
+    public function update(UpdateVolunteerOpportunityRequest $request, VolunteerOpportunity $volunteerOpportunity)
     {
         $data = $request->validated();
-        $volunteerOpportunity = $this->volunteerOpportunityService->update($id, $data);
-        return new VolunteerOpportunityRessource($volunteerOpportunity);
+        $updated = $this->volunteerOpportunityService->update($volunteerOpportunity, $data);
+        return new VolunteerOpportunityResource($updated);
     }
 
     public function destroy($id)

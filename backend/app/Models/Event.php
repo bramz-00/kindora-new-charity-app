@@ -10,4 +10,18 @@ class Event extends Model
 {
     /** @use HasFactory<\Database\Factories\EventFactory> */
     use HasFactory,SoftDeletes;
+
+    protected $fillable = [
+        'organisation_id',
+        'created_by_id',
+        'title',
+        'description',
+        'location',
+        'start_date',
+        'end_date',
+        'target_amount',
+        'status',
+        'type',
+        'is_active',
+    ];
 }

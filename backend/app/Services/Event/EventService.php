@@ -17,9 +17,9 @@ class EventService
         return $this->repository->all();
     }
 
-    public function find($id)
+    public function find($event)
     {
-        return $this->repository->find($id);
+        return $this->repository->find($event);
     }
 
     public function create(array $data)
@@ -27,14 +27,14 @@ class EventService
         return $this->repository->create($data);
     }
 
-    public function update($id, array $data)
+    public function update($event, array $data)
     {
-        return $this->repository->update($id, $data);
+        return $this->repository->update($event, $data);
     }
 
-    public function delete($id)
+    public function delete($event)
     {
-        return $this->repository->delete($id);
+        return $this->repository->delete($event);
     }
 }
 

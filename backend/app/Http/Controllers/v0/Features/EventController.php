@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Event\StoreEventRequest;
 use App\Http\Requests\Event\UpdateEventRequest;
-use App\Http\Resources\EventRessource;
+use App\Http\Resources\EventResource;
+use App\Models\Event;
 use App\Services\Event\EventService;
 
 class EventController extends Controller
@@ -19,7 +20,7 @@ class EventController extends Controller
     public function index()
     {
   
-        return EventRessource::collection($this->eventService->all());
+        return EventResource::collection($this->eventService->all());
 
     }
 
@@ -27,24 +28,24 @@ class EventController extends Controller
     {
         $data = $request->validated();
         $event = $this->eventService->create($data);
-        return new EventRessource($event);
+        return new EventResource($event);
     }
 
-    public function show($id)
+    public function show($event)
     {
-        return response()->json($this->eventService->find($id));
+        return new EventResource($this->eventService->find($event));
     }
 
-    public function update(UpdateEventRequest $request, $id)
+    public function update(UpdateEventRequest $request,Event $event)
     {
         $data = $request->validated();
-        $event = $this->eventService->update($id, $data);
-        return new EventRessource($event);
+        $this->eventService->update($event, $data);
+        return new EventResource($event);
     }
 
-    public function destroy($id)
+    public function destroy($event)
     {
-        $this->eventService->delete($id);
+        $this->eventService->delete($event);
         return response()->json([
             'success' => true,
             'message' => 'Event deleted successfully'

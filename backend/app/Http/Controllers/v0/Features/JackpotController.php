@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Jackpot\StoreJackpotRequest;
 use App\Http\Requests\Jackpot\UpdateJackpotRequest;
-use App\Http\Resources\JackpotRessource;
+use App\Http\Resources\JackpotResource;
+use App\Models\Jackpot;
 use App\Services\Jackpot\JackpotService;
 
 class JackpotController extends Controller
@@ -19,7 +20,7 @@ class JackpotController extends Controller
     public function index()
     {
   
-        return JackpotRessource::collection($this->jackpotService->all());
+        return JackpotResource::collection($this->jackpotService->all());
 
     }
 
@@ -27,24 +28,24 @@ class JackpotController extends Controller
     {
         $data = $request->validated();
         $jackpot = $this->jackpotService->create($data);
-        return new JackpotRessource($jackpot);
+        return new JackpotResource($jackpot);
     }
 
-    public function show($id)
+    public function show($jackpot)
     {
-        return response()->json($this->jackpotService->find($id));
+        return new JackpotResource($this->jackpotService->find($jackpot));
     }
 
-    public function update(UpdateJackpotRequest $request, $id)
+    public function update(UpdateJackpotRequest $request, Jackpot $jackpot)
     {
         $data = $request->validated();
-        $jackpot = $this->jackpotService->update($id, $data);
-        return new JackpotRessource($jackpot);
+        $this->jackpotService->update($jackpot, $data);
+        return new JackpotResource($jackpot);
     }
 
-    public function destroy($id)
+    public function destroy($jackpot)
     {
-        $this->jackpotService->delete($id);
+        $this->jackpotService->delete($jackpot);
         return response()->json([
             'success' => true,
             'message' => 'Jackpot deleted successfully'

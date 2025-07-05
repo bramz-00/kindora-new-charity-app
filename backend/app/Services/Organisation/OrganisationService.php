@@ -16,9 +16,9 @@ class OrganisationService
         return $this->repository->all();
     }
 
-    public function find($id)
+    public function find($organisation)
     {
-        return $this->repository->find($id);
+        return $this->repository->find($organisation);
     }
 
     public function create(array $data)
@@ -26,14 +26,14 @@ class OrganisationService
         return $this->repository->create($data);
     }
 
-    public function update($id, array $data)
+    public function update($organisation, array $data)
     {
-        return $this->repository->update($id, $data);
+        return $this->repository->update($organisation, $data);
     }
 
-    public function delete($id)
+    public function delete($organisation)
     {
-        return $this->repository->delete($id);
+        return $this->repository->delete($organisation);
     }
    
 }

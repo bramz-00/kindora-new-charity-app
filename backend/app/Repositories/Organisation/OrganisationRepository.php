@@ -9,9 +9,9 @@ class OrganisationRepository implements OrganisationRepositoryInterface
         return Organisation::all();
     }
 
-    public function find($id)
+    public function find($organisation)
     {
-        return Organisation::findOrFail($id);
+        return $organisation;
     }
 
     public function create(array $data)
@@ -19,16 +19,14 @@ class OrganisationRepository implements OrganisationRepositoryInterface
         return Organisation::create($data);
     }
 
-    public function update($id, array $data)
+    public function update($organisation, array $data)
     {
-        $organisation = $this->find($id);
         $organisation->update($data);
         return $organisation;
     }
 
-    public function delete($id)
+    public function delete($organisation)
     {
-        $organisation = $this->find($id);
         return $organisation->delete();
     }
 }

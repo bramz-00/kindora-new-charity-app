@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Good\StoreGoodRequest;
 use App\Http\Requests\Good\UpdateGoodRequest;
-use App\Http\Resources\GoodRessource;
+use App\Http\Resources\GoodResource;
+use App\Models\Good;
 use App\Services\Good\GoodService;
 
 class GoodController extends Controller
@@ -19,32 +20,31 @@ class GoodController extends Controller
     public function index()
     {
   
-        return GoodRessource::collection($this->goodService->all());
+        return GoodResource::collection($this->goodService->all());
 
     }
 
     public function store(StoreGoodRequest $request)
     {
         $data = $request->validated();
-        $good = $this->goodService->create($data);
-        return new GoodRessource($good);
+        return new GoodResource($this->goodService->create($data););
     }
 
-    public function show($id)
+    public function show($good)
     {
-        return response()->json($this->goodService->find($id));
+        return new GoodResource($this->goodService->find($good));
     }
 
-    public function update(UpdateGoodRequest $request, $id)
+    public function update(UpdateGoodRequest $request, Good $good)
     {
         $data = $request->validated();
-        $good = $this->goodService->update($id, $data);
-        return new GoodRessource($good);
+        $this->goodService->update($good, $data);
+        return new GoodResource($good);
     }
 
-    public function destroy($id)
+    public function destroy($good)
     {
-        $this->goodService->delete($id);
+        $this->goodService->delete($good);
         return response()->json([
             'success' => true,
             'message' => 'Good deleted successfully'

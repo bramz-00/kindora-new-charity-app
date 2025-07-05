@@ -9,9 +9,9 @@ class JackpotRepository implements JackpotRepositoryInterface
         return Jackpot::all();
     }
 
-    public function find($id)
+    public function find($jackpot)
     {
-        return Jackpot::findOrFail($id);
+        return Jackpot::findOrFail($jackpot);
     }
 
     public function create(array $data)
@@ -19,16 +19,14 @@ class JackpotRepository implements JackpotRepositoryInterface
         return Jackpot::create($data);
     }
 
-    public function update($id, array $data)
+    public function update($jackpot, array $data)
     {
-        $jackpot = $this->find($id);
         $jackpot->update($data);
         return $jackpot;
     }
 
-    public function delete($id)
+    public function delete($jackpot)
     {
-        $jackpot = $this->find($id);
         return $jackpot->delete();
     }
 }

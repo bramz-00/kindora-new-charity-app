@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Organisation\StoreOrganisationRequest;
 use App\Http\Requests\Organisation\UpdateOrganisationRequest;
-use App\Http\Resources\OrganisationRessource;
+use App\Http\Resources\OrganisationResource;
 use App\Models\Organisation;
 use App\Services\Organisation\OrganisationService;
 
@@ -18,33 +18,31 @@ class OrganisationController extends Controller
 
     public function index()
     {
-  
-        return OrganisationRessource::collection($this->organisationService->all());
-
+        return OrganisationResource::collection($this->organisationService->all());
     }
 
     public function store(StoreOrganisationRequest $request)
     {
         $data = $request->validated();
         $organisation = $this->organisationService->create($data);
-        return new OrganisationRessource($organisation);
+        return new OrganisationResource($organisation);
     }
 
-    public function show($id)
+    public function show(Organisation $organisation)
     {
-        return response()->json($this->organisationService->find($id));
+        return new OrganisationResource($this->organisationService->find($organisation));
     }
 
-    public function update(UpdateOrganisationRequest $request, $id)
+    public function update(UpdateOrganisationRequest $request, Organisation $organisation)
     {
         $data = $request->validated();
-        $organisation = $this->organisationService->update($id, $data);
-        return new OrganisationRessource($organisation);
+        $this->organisationService->update($organisation, $data);
+        return new OrganisationResource($organisation);
     }
 
-    public function destroy($id)
+    public function destroy($organisation)
     {
-        $this->organisationService->delete($id);
+        $this->organisationService->delete($organisation);
         return response()->json([
             'success' => true,
             'message' => 'Organisation deleted successfully'

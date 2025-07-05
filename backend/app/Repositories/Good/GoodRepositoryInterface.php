@@ -3,11 +3,13 @@
 
 namespace App\Repositories\Good;
 
+use App\Models\Good;
+
 interface GoodRepositoryInterface
 {
     public function all();
-    public function find($id);
+    public function find(Good $good);
     public function create(array $data);
-    public function update($id, array $data);
-    public function delete($id);
+    public function update(Good $good, array $data);
+    public function delete(Good $good);
 }

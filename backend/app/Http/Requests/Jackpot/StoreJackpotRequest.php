@@ -22,7 +22,16 @@ class StoreJackpotRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'organisation_id' => 'required|exists:organisations,id',
+            'created_by_id' => 'required|exists:users,id',
+            'title' => 'required|string|max:255|unique:jackpots,title',
+            'description' => 'required|string',
+            'target_amount' => 'required|numeric|min:0',
+            'collected_amount' => 'required|numeric|min:0',
+            'start_date' => 'nullable|date',
+            'ends_at' => 'nullable|date|after_or_equal:start_date',
+            'status' => 'in:open,closed',
+            'is_active' => 'boolean',
         ];
     }
 }

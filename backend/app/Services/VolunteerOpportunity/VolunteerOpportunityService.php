@@ -27,10 +27,11 @@ class VolunteerOpportunityService
         return $this->repository->create($data);
     }
 
-    public function update($id, array $data)
+    public function update($volunteerOpportunity, array $data)
     {
-        return $this->repository->update($id, $data);
+        return $this->repository->update($volunteerOpportunity, $data);
     }
+    
 
     public function delete($id)
     {

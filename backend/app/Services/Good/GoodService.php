@@ -17,9 +17,9 @@ class GoodService
         return $this->repository->all();
     }
 
-    public function find($id)
+    public function find($good)
     {
-        return $this->repository->find($id);
+        return $this->repository->find($good);
     }
 
     public function create(array $data)
@@ -27,14 +27,14 @@ class GoodService
         return $this->repository->create($data);
     }
 
-    public function update($id, array $data)
+    public function update($good, array $data)
     {
-        return $this->repository->update($id, $data);
+        return $this->repository->update($good, $data);
     }
 
-    public function delete($id)
+    public function delete($good)
     {
-        return $this->repository->delete($id);
+        return $this->repository->delete($good);
     }
 }
 

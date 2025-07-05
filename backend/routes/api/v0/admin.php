@@ -59,8 +59,8 @@ Route::middleware('auth:sanctum')->prefix("admin")->group(
         Route::prefix('jackpots')->group(function () {
         });
         //Volunteer_Opportunities
-        Route::apiResource('volunteerOpportunity', VolunteerOpportunityController::class);
-        Route::prefix('volunteerOpportunities')->group(function () {
+        Route::apiResource('volunteer_opportunity', VolunteerOpportunityController::class);
+        Route::prefix('volunteer_opportunities')->group(function () {
         });
     }
 );
