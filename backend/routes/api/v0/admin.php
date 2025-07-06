@@ -54,13 +54,25 @@ Route::middleware('auth:sanctum')->prefix("admin")->group(
         Route::apiResource('event', EventController::class);
         Route::prefix('events')->group(function () {
         });
+        Route::apiResource('event_order', EventController::class);
+        Route::prefix('event_orders')->group(function () {
+        });
+        Route::apiResource('event_ticket', EventController::class);
+        Route::prefix('event_tickets')->group(function () {
+        });
         //Jackpots
         Route::apiResource('jackpot', JackpotController::class);
         Route::prefix('jackpots')->group(function () {
         });
+        Route::apiResource('jackpot_contribution', JackpotController::class);
+        Route::prefix('jackpot_contributions')->group(function () {
+        });
         //Volunteer_Opportunities
         Route::apiResource('volunteer_opportunity', VolunteerOpportunityController::class);
         Route::prefix('volunteer_opportunities')->group(function () {
+        });
+        Route::apiResource('volunteer_application', VolunteerOpportunityController::class);
+        Route::prefix('volunteer_applications')->group(function () {
         });
     }
 );
