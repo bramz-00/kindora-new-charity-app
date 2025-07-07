@@ -9,5 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class VolunteerApplication extends Model
 {
     use HasFactory,SoftDeletes;
-
+    protected $fillable = [
+        'volunteer_opportunity_id',
+        'user_id',
+    ];
 }

@@ -22,17 +22,13 @@ class StoreEventOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'organisation_id' => 'required|exists:organisations,id',
-            'created_by_id' => 'required|exists:users,id',
-            'title' => 'required|string|max:255|unique:events,title',
-            'description' => 'required|string',
-            'location' => 'required|string|max:255',
-            'start_date' => 'nullable|date',
-            'end_date' => 'nullable|date|after_or_equal:start_date',
-            'target_amount' => 'nullable|numeric|min:0',
-            'status' => 'in:open,closed',
-            'type' => 'in:public,private',
-            'is_active' => 'boolean',
+            'event_ticket_id' => 'required|exists:event_tickets,id',
+            'user_id' => 'required|exists:users,id',
+            'total_price' => 'required|numeric|min:0',
+            'quantity' => 'required|integer|min:1',
+            'status' => 'nullable|string|in:pending,paid,cancelled',
+            'payment_method' => 'nullable|string|in:online,cash',
+            'purchased_at' => 'nullable|date',
         ];
     }
 }

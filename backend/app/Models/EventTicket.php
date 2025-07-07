@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EventTicket extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
+    protected $fillable = [
+        'event_id',
+        'name',
+        'price',
+        'quantity',
+        'sold_count',
+    ];
 
 }

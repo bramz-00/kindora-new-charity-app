@@ -9,5 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class JackpotContribution extends Model
 {
     use HasFactory,SoftDeletes;
+    protected $fillable = [
+        'jackpot_id',
+        'user_id',
+        'amount',
+    ];
 
 }

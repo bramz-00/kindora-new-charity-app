@@ -22,16 +22,7 @@ class UpdateJackpotContributionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'organisation_id' => 'sometimes|exists:organisations,id',
-            'created_by_id' => 'sometimes|exists:users,id',
-            'title' => 'sometimes|string|max:255|unique:jackpots,title,' . $this->route('jackpot')->id,
-            'description' => 'sometimes|string',
-            'target_amount' => 'sometimes|numeric|min:0',
-            'collected_amount' => 'sometimes|numeric|min:0',
-            'start_date' => 'nullable|date',
-            'ends_at' => 'nullable|date|after_or_equal:start_date',
-            'status' => 'in:open,closed',
-            'is_active' => 'boolean',
+            'amount' => 'sometimes|numeric|min:0.01',
         ];
     }
 }

@@ -22,15 +22,8 @@ class StoreVolunteerApplicationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'organisation_id' => 'required|exists:organisations,id',
-            'created_by_id' => 'required|exists:users,id',
-            'title' => 'required|string|max:255|unique:volunteer_opportunities,title',
-            'description' => 'required|string',
-            'location' => 'required|string|max:255',
-            'start_date' => 'nullable|date',
-            'end_date' => 'nullable|date|after_or_equal:start_date',
-            'status' => 'in:open,closed',
-            'is_active' => 'boolean',
+            'volunteer_opportunity_id' => 'required|exists:volunteer_opportunities,id',
+            'user_id' => 'required|exists:users,id',
         ];
     }
 }
