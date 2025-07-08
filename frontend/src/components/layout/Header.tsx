@@ -24,14 +24,14 @@ export default function Header() {
             <div className="flex h-16 items-center">
 
               <div className="ml-4 flex lg:ml-0 lg:px-12">
-                <a href="#" className="flex items-center  ">
+                <Link to="/" className="flex items-center  ">
                   <img
                     alt=""
                     src={logo}
                     className="h-8 w-auto"
                   />
                   <span className="font-bold text-lg lg:block hidden    text-blue-600  border-blue-600 rounded-r  -ml-1.5 mt-4 border px-1.5 h-8">indora</span>
-                </a>
+                </Link>
               </div>
 
               {/* Flyout menus */}
