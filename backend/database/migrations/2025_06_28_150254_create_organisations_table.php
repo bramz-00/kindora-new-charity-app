@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('logo')->nullable();
             $table->text('address');
             $table->text('description');
-            $table->text('country')->default('Algeria');
+            $table->string('country')->default('Algeria');
             $table->string('legal_status')->default('association');
             $table->boolean('verified')->default( false);
             $table->boolean('is_active')->default( true);
