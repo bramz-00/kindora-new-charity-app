@@ -4,12 +4,12 @@ namespace App\Services\User;
 
 use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
-use DB;
-use Hash;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
-use Storage;
 
 
 class UserService
@@ -322,7 +322,7 @@ class UserService
     /**
      * Handle avatar upload
      */
-    private function handleAvatarUpload($avatar, int $userId = null): string
+    private function handleAvatarUpload($avatar, ?int $userId = null): string
     {
         // Delete old avatar if updating
         if ($userId) {

@@ -11,7 +11,7 @@ interface UserRepositoryInterface
     /**
      * Get all users with optional pagination
      */
-    public function getAll(array $filters = [], int $perPage = null): Collection|LengthAwarePaginator;
+    public function getAll(array $filters = [], ?int $perPage = null): Collection|LengthAwarePaginator;
 
     /**
      * Find user by ID
@@ -56,17 +56,17 @@ interface UserRepositoryInterface
     /**
      * Get active users only
      */
-    public function getActiveUsers(int $perPage = null): Collection|LengthAwarePaginator;
+    public function getActiveUsers(?int $perPage = null): Collection|LengthAwarePaginator;
 
     /**
      * Get inactive users only
      */
-    public function getInactiveUsers(int $perPage = null): Collection|LengthAwarePaginator;
+    public function getInactiveUsers(?int $perPage = null): Collection|LengthAwarePaginator;
 
     /**
      * Search users by name or email
      */
-    public function search(string $query, int $perPage = null): Collection|LengthAwarePaginator;
+    public function search(string $query, ?int $perPage = null): Collection|LengthAwarePaginator;
 
     /**
      * Update user profile

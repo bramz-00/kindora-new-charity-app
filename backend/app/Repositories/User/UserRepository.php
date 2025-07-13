@@ -20,7 +20,7 @@ class UserRepository implements UserRepositoryInterface
     /**
      * Get all users with optional pagination and filters
      */
-    public function getAll(array $filters = [], int $perPage = null): Collection|LengthAwarePaginator
+    public function getAll(array $filters = [], ?int $perPage = null): Collection|LengthAwarePaginator
     {
         $query = $this->model->newQuery();
 
@@ -134,7 +134,7 @@ class UserRepository implements UserRepositoryInterface
     /**
      * Get active users only
      */
-    public function getActiveUsers(int $perPage = null): Collection|LengthAwarePaginator
+    public function getActiveUsers(?int $perPage = null): Collection|LengthAwarePaginator
     {
         $query = $this->model->where('is_active', true)->orderBy('created_at', 'desc');
         
@@ -144,7 +144,7 @@ class UserRepository implements UserRepositoryInterface
     /**
      * Get inactive users only
      */
-    public function getInactiveUsers(int $perPage = null): Collection|LengthAwarePaginator
+    public function getInactiveUsers(?int $perPage = null): Collection|LengthAwarePaginator
     {
         $query = $this->model->where('is_active', false)->orderBy('created_at', 'desc');
         
@@ -154,7 +154,7 @@ class UserRepository implements UserRepositoryInterface
     /**
      * Search users by name or email
      */
-    public function search(string $query, int $perPage = null): Collection|LengthAwarePaginator
+    public function search(string $query, ?int $perPage = null): Collection|LengthAwarePaginator
     {
         $searchQuery = $this->model->where(function ($q) use ($query) {
             $q->where('name', 'LIKE', "%{$query}%")
