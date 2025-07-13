@@ -40,7 +40,7 @@ class OrganisationController extends Controller
         return new OrganisationResource($organisation);
     }
 
-    public function destroy($organisation)
+    public function destroy(Organisation $organisation)
     {
         $this->organisationService->delete($organisation);
         return response()->json([

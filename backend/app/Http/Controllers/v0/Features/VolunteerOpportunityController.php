@@ -31,9 +31,9 @@ class VolunteerOpportunityController extends Controller
         return new VolunteerOpportunityResource($volunteerOpportunity);
     }
 
-    public function show($id)
+    public function show($volunteerOpportunity)
     {
-        return response()->json($this->volunteerOpportunityService->find($id));
+        return new VolunteerOpportunityResource($this->volunteerOpportunityService->find($volunteerOpportunity));
     }
 
     public function update(UpdateVolunteerOpportunityRequest $request, VolunteerOpportunity $volunteerOpportunity)
@@ -43,12 +43,12 @@ class VolunteerOpportunityController extends Controller
         return new VolunteerOpportunityResource($updated);
     }
 
-    public function destroy($id)
+    public function destroy(VolunteerOpportunity $volunteerOpportunity)
     {
-        $this->volunteerOpportunityService->delete($id);
+        $this->volunteerOpportunityService->delete($volunteerOpportunity);
         return response()->json([
             'success' => true,
-            'message' => 'VolunteerOpportunity deleted successfully'
+            'message' => 'Volunteer Opportunity deleted successfully'
         ]);
     }
 }

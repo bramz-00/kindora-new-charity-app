@@ -41,7 +41,7 @@ public function __construct(protected ReviewService $reviewService)
         return new ReviewResource($review);
     }
 
-    public function destroy($review)
+    public function destroy(Review $review)
     {
         $this->reviewService->delete($review);
         return response()->json([

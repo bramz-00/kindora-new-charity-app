@@ -31,7 +31,7 @@ class EventController extends Controller
         return new EventResource($event);
     }
 
-    public function show($event)
+    public function show(Event $event)
     {
         return new EventResource($this->eventService->find($event));
     }
@@ -43,7 +43,7 @@ class EventController extends Controller
         return new EventResource($event);
     }
 
-    public function destroy($event)
+    public function destroy(Event $event)
     {
         $this->eventService->delete($event);
         return response()->json([

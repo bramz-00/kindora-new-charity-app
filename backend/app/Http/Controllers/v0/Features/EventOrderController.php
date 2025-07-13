@@ -31,7 +31,7 @@ class EventOrderController extends Controller
         return new EventOrderResource($eventOrder);
     }
 
-    public function show($eventOrder)
+    public function show(EventOrder $eventOrder)
     {
         return new EventOrderResource($this->eventOrderService->find($eventOrder));
     }
@@ -43,7 +43,7 @@ class EventOrderController extends Controller
         return new EventOrderResource($eventOrder);
     }
 
-    public function destroy($eventOrder)
+    public function destroy(EventOrder $eventOrder)
     {
         $this->eventOrderService->delete($eventOrder);
         return response()->json([

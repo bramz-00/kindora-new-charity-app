@@ -4,7 +4,7 @@ namespace App\Services\Review;
 
 use App\Repositories\Review\ReviewRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Str;
 class ReviewService
 {
 
@@ -39,6 +39,7 @@ class ReviewService
 
     public function delete($review)
     {
+        // dd($review);
         return $this->repository->delete($review);
     }
 
@@ -56,7 +57,7 @@ class ReviewService
             'volunteer_opportunity' => \App\Models\VolunteerOpportunity::class,
         ];
 
-        $key = \Str::lower($type);
+        $key = Str::lower($type);
 
         if (!array_key_exists($key, $map)) {
             throw new \InvalidArgumentException("Invalid reviewable type: $type");

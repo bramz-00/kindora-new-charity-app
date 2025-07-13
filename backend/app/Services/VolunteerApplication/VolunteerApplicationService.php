@@ -17,9 +17,9 @@ class VolunteerApplicationService
         return $this->repository->all();
     }
 
-    public function find($id)
+    public function find($volunteerApplication)
     {
-        return $this->repository->find($id);
+        return $this->repository->find($volunteerApplication);
     }
 
     public function create(array $data)
@@ -33,9 +33,9 @@ class VolunteerApplicationService
     }
     
 
-    public function delete($id)
+    public function delete($volunteerApplication)
     {
-        return $this->repository->delete($id);
+        return $this->repository->delete($volunteerApplication);
     }
 }
 

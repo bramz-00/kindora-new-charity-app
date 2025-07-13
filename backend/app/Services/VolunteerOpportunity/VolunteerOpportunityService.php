@@ -17,9 +17,9 @@ class VolunteerOpportunityService
         return $this->repository->all();
     }
 
-    public function find($id)
+    public function find($volunteerOpportunity)
     {
-        return $this->repository->find($id);
+        return $this->repository->find($volunteerOpportunity);
     }
 
     public function create(array $data)
@@ -33,9 +33,9 @@ class VolunteerOpportunityService
     }
     
 
-    public function delete($id)
+    public function delete($volunteerOpportunity)
     {
-        return $this->repository->delete($id);
+        return $this->repository->delete($volunteerOpportunity);
     }
 }
 

@@ -31,9 +31,9 @@ class VolunteerApplicationController extends Controller
         return new VolunteerApplicationResource($volunteerApplication);
     }
 
-    public function show($id)
+    public function show(VolunteerApplication $volunteerApplication)
     {
-        return response()->json($this->volunteerApplicationService->find($id));
+        return new VolunteerApplicationResource($this->volunteerApplicationService->find($volunteerApplication));
     }
 
     public function update(UpdateVolunteerApplicationRequest $request, VolunteerApplication $volunteerApplication)
@@ -43,9 +43,9 @@ class VolunteerApplicationController extends Controller
         return new VolunteerApplicationResource($updated);
     }
 
-    public function destroy($id)
+    public function destroy(VolunteerApplication $volunteerApplication)
     {
-        $this->volunteerApplicationService->delete($id);
+        $this->volunteerApplicationService->delete($volunteerApplication);
         return response()->json([
             'success' => true,
             'message' => 'VolunteerApplication deleted successfully'

@@ -31,7 +31,7 @@ class EventTicketController extends Controller
         return new EventTicketResource($eventTicket);
     }
 
-    public function show($eventTicket)
+    public function show(EventTicket $eventTicket)
     {
         return new EventTicketResource($this->eventTicketService->find($eventTicket));
     }
@@ -43,7 +43,7 @@ class EventTicketController extends Controller
         return new EventTicketResource($eventTicket);
     }
 
-    public function destroy($eventTicket)
+    public function destroy(EventTicket $eventTicket)
     {
         $this->eventTicketService->delete($eventTicket);
         return response()->json([

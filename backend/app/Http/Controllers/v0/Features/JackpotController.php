@@ -31,7 +31,7 @@ class JackpotController extends Controller
         return new JackpotResource($jackpot);
     }
 
-    public function show($jackpot)
+    public function show(Jackpot $jackpot)
     {
         return new JackpotResource($this->jackpotService->find($jackpot));
     }
@@ -43,7 +43,7 @@ class JackpotController extends Controller
         return new JackpotResource($jackpot);
     }
 
-    public function destroy($jackpot)
+    public function destroy(Jackpot $jackpot)
     {
         $this->jackpotService->delete($jackpot);
         return response()->json([

@@ -29,7 +29,7 @@ class GoodController extends Controller
         return new GoodResource($this->goodService->create($data));
     }
 
-    public function show($good)
+    public function show(Good $good)
     {
         return new GoodResource($this->goodService->find($good));
     }
@@ -41,7 +41,7 @@ class GoodController extends Controller
         return new GoodResource($good);
     }
 
-    public function destroy($good)
+    public function destroy(Good $good)
     {
         $this->goodService->delete($good);
         return response()->json([
