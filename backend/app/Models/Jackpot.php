@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Jackpot extends Model
 {
     /** @use HasFactory<\Database\Factories\JackpotFactory> */
-    use HasFactory ,SoftDeletes;
+    use HasFactory, SoftDeletes;
     protected $fillable = [
         'organisation_id',
         'created_by_id',
@@ -22,4 +22,8 @@ class Jackpot extends Model
         'status',
         'is_active',
     ];
+    public function reviews()
+    {
+        return $this->morphMany(Review::class, 'reviewable');
+    }
 }

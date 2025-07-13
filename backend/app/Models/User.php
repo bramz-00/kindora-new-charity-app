@@ -9,11 +9,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable 
+class User extends Authenticatable
 // implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable,HasApiTokens,SoftDeletes;
+    use HasFactory, Notifiable, HasApiTokens, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -70,13 +70,17 @@ class User extends Authenticatable
     {
         return $query->where(function ($q) use ($search) {
             $q->where('email', 'LIKE', "%{$search}%")
-              ->orWhere('first_name', 'LIKE', "%{$search}%")
-              ->orWhere('last_name', 'LIKE', "%{$search}%");
+                ->orWhere('first_name', 'LIKE', "%{$search}%")
+                ->orWhere('last_name', 'LIKE', "%{$search}%");
         });
     }
 
 
-        /**
+    public function reviews()
+    {
+        return $this->morphMany(Review::class, 'reviewable');
+    }
+    /**
      * Get the user's avatar URL.
      */
     public function getAvatarUrlAttribute(): ?string

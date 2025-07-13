@@ -16,6 +16,8 @@ use App\Repositories\JackpotContribution\JackpotContributionRepository;
 use App\Repositories\JackpotContribution\JackpotContributionRepositoryInterface;
 use App\Repositories\Organisation\OrganisationRepository;
 use App\Repositories\Organisation\OrganisationRepositoryInterface;
+use App\Repositories\Review\ReviewRepository;
+use App\Repositories\Review\ReviewRepositoryInterface;
 use App\Repositories\User\UserRepository;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\VolunteerApplication\VolunteerApplicationRepository;
@@ -41,6 +43,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(JackpotContributionRepositoryInterface::class, JackpotContributionRepository::class);
         $this->app->bind(VolunteerOpportunityRepositoryInterface::class, VolunteerOpportunityRepository::class);
         $this->app->bind(VolunteerApplicationRepositoryInterface::class, VolunteerApplicationRepository::class);
+        $this->app->bind(ReviewRepositoryInterface::class, ReviewRepository::class);
 
   
     }

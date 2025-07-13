@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Good extends Model
 {
     /** @use HasFactory<\Database\Factories\GoodFactory> */
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
     protected $fillable = [
         "title",
         "description",
@@ -26,7 +26,10 @@ class Good extends Model
 
 
 
-
+    public function reviews()
+    {
+        return $this->morphMany(Review::class, 'reviewable');
+    }
 
     protected static function booted()
     {
@@ -35,6 +38,3 @@ class Good extends Model
         });
     }
 }
-
-
-

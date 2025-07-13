@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class VolunteerOpportunity extends Model
 {
     /** @use HasFactory<\Database\Factories\VolunteerOpportunityFactory> */
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
 
     protected $fillable = [
@@ -23,4 +23,8 @@ class VolunteerOpportunity extends Model
         'status',
         'is_active',
     ];
+    public function reviews()
+    {
+        return $this->morphMany(Review::class, 'reviewable');
+    }
 }
