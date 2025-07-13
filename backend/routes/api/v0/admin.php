@@ -1,9 +1,11 @@
 <?php
+
 use App\Http\Controllers\v0\Admin\UserController;
 use App\Http\Controllers\v0\Features\EventController;
 use App\Http\Controllers\v0\Features\GoodController;
 use App\Http\Controllers\v0\Features\JackpotController;
 use App\Http\Controllers\v0\Features\OrganisationController;
+use App\Http\Controllers\v0\Features\ReviewController;
 use App\Http\Controllers\v0\Features\VolunteerOpportunityController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,45 +43,34 @@ Route::middleware('auth:sanctum')->prefix("admin")->group(
 
         //Organisations
         Route::apiResource('organisation', OrganisationController::class);
-        Route::prefix('organisations')->group(function () {
-        });
+        Route::prefix('organisations')->group(function () {});
 
 
         //Goods
         Route::apiResource('good', GoodController::class);
-        Route::prefix('goods')->group(function () {
-        });
+        Route::prefix('goods')->group(function () {});
 
         //Events
         Route::apiResource('event', EventController::class);
-        Route::prefix('events')->group(function () {
-        });
+        Route::prefix('events')->group(function () {});
         Route::apiResource('event_order', EventController::class);
-        Route::prefix('event_orders')->group(function () {
-        });
+        Route::prefix('event_orders')->group(function () {});
         Route::apiResource('event_ticket', EventController::class);
-        Route::prefix('event_tickets')->group(function () {
-        });
+        Route::prefix('event_tickets')->group(function () {});
         //Jackpots
         Route::apiResource('jackpot', JackpotController::class);
-        Route::prefix('jackpots')->group(function () {
-        });
+        Route::prefix('jackpots')->group(function () {});
         Route::apiResource('jackpot_contribution', JackpotController::class);
-        Route::prefix('jackpot_contributions')->group(function () {
-        });
+        Route::prefix('jackpot_contributions')->group(function () {});
         //Volunteer_Opportunities
         Route::apiResource('volunteer_opportunity', VolunteerOpportunityController::class);
-        Route::prefix('volunteer_opportunities')->group(function () {
-        });
+        Route::prefix('volunteer_opportunities')->group(function () {});
         Route::apiResource('volunteer_application', VolunteerOpportunityController::class);
-        Route::prefix('volunteer_applications')->group(function () {
-        });
+        Route::prefix('volunteer_applications')->group(function () {});
+
+
+
+        Route::apiResource('review', ReviewController::class);
+        Route::prefix('reviews')->group(function () {});
     }
 );
-
-
-
-
-
-
-
