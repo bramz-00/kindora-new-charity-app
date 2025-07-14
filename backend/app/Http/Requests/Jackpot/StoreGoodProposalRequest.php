@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\GoodProposal;
 
+use App\Models\Good;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Validator;
 
 class StoreGoodProposalRequest extends FormRequest
 {
@@ -21,17 +23,20 @@ class StoreGoodProposalRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'organisation_id' => 'required|exists:organisations,id',
-            'created_by_id' => 'required|exists:users,id',
-            'title' => 'required|string|max:255|unique:jackpots,title',
-            'description' => 'required|string',
-            'target_amount' => 'required|numeric|min:0',
-            'collected_amount' => 'required|numeric|min:0',
-            'start_date' => 'nullable|date',
-            'ends_at' => 'nullable|date|after_or_equal:start_date',
-            'status' => 'in:open,closed',
-            'is_active' => 'boolean',
+       return [
+            'good_id' => ['required', 'exists:goods,id'],
+            'user_id' => ['required', 'exists:users,id'],
+            'exchange_good_id' => ['nullable', 'exists:goods,id'],
         ];
+    }
+        public function withValidator(Validator $validator): void
+    {
+        $validator->after(function ($validator) {
+            $good = Good::find($this->good_id);
+
+            if ($good && $good->type === 'exchange' && empty($this->exchange_good_id)) {
+                $validator->errors()->add('exchange_good_id', 'Exchange good is required when the selected good is of type exchange.');
+            }
+        });
     }
 }
