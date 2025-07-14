@@ -10,6 +10,8 @@ use App\Repositories\EventTicket\EventTicketRepository;
 use App\Repositories\EventTicket\EventTicketRepositoryInterface;
 use App\Repositories\Good\GoodRepository;
 use App\Repositories\Good\GoodRepositoryInterface;
+use App\Repositories\GoodProposal\GoodProposalRepository;
+use App\Repositories\GoodProposal\GoodProposalRepositoryInterface;
 use App\Repositories\Jackpot\JackpotRepository;
 use App\Repositories\Jackpot\JackpotRepositoryInterface;
 use App\Repositories\JackpotContribution\JackpotContributionRepository;
@@ -33,18 +35,25 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+       
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+       
         $this->app->bind(OrganisationRepositoryInterface::class, OrganisationRepository::class);
+       
         $this->app->bind(GoodRepositoryInterface::class, GoodRepository::class);
+        $this->app->bind(GoodProposalRepositoryInterface::class, GoodProposalRepository::class);
+       
         $this->app->bind(EventRepositoryInterface::class, EventRepository::class);
         $this->app->bind(EventOrderRepositoryInterface::class, EventOrderRepository::class);
         $this->app->bind(EventTicketRepositoryInterface::class, EventTicketRepository::class);
+       
         $this->app->bind(JackpotRepositoryInterface::class, JackpotRepository::class);
         $this->app->bind(JackpotContributionRepositoryInterface::class, JackpotContributionRepository::class);
+       
         $this->app->bind(VolunteerOpportunityRepositoryInterface::class, VolunteerOpportunityRepository::class);
         $this->app->bind(VolunteerApplicationRepositoryInterface::class, VolunteerApplicationRepository::class);
+        
         $this->app->bind(ReviewRepositoryInterface::class, ReviewRepository::class);
-
   
     }
 

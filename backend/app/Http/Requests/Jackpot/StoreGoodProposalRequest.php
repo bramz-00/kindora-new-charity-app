@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Jackpot;
+namespace App\Http\Requests\GoodProposal;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreJackpotRequest extends FormRequest
+class StoreGoodProposalRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
