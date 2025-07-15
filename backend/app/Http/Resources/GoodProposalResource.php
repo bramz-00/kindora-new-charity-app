@@ -29,9 +29,10 @@ class GoodProposalResource extends JsonResource
         ];
     }
 
- protected function generateQrCodeSvgAsDataUri(): string
+    protected function getQrCodeSvg()
     {
-        $svg = QrCode::format('svg')->size(300)->generate($this->req_uuid);
-        return 'data:image/svg+xml;base64,' . base64_encode($svg);
+        $url = route('proposals.validate', $this->req_uuid);
+
+        return QrCode::format('svg')->size(300)->generate($this->req_uuid);
     }
 }

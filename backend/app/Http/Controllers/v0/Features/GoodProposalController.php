@@ -29,9 +29,8 @@ class GoodProposalController extends Controller
 
     public function show(GoodProposal $good_proposal)
     {
-        // dd($this->goodProposalService->find($good_proposal));
-        $qrSvg = QrCode::format('svg')->size(300)->generate($good_proposal->req_uuid);
-
+        $url = route('good_proposals.validate', $good_proposal->req_uuid);
+        $qrSvg = QrCode::format('svg')->size(300)->generate($url);
         return view('req', [
             'proposal' => $good_proposal,
             'qr_code_svg' => $qrSvg,

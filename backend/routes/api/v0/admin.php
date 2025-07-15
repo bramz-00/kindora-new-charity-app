@@ -55,7 +55,7 @@ Route::prefix("admin")->group(
         Route::prefix('good_proposals')->group(function () {
 
             Route::post('/{good_proposal}/reject', [GoodProposalController::class, 'rejectGoodProposal']);
-            Route::post('/{good_proposal}/validate', [GoodProposalController::class, 'validateGoodProposal']);
+            Route::post('/{good_proposal}/validate', [GoodProposalController::class, 'validateGoodProposal'])->name('good_proposals.validate');
         });
         //Events
         Route::apiResource('event', EventController::class);
