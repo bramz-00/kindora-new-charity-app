@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class GoodProposalResource extends JsonResource
 {
@@ -16,17 +17,21 @@ class GoodProposalResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'good_uuid' => $this->good_uuid,
-            'title' => $this->title,
-            'slug' => $this->slug,
-            'type' => $this->type,
-            'exchange_condition' => $this->exchange_condition,
+            'good_id' => $this->good_id,
+            'user_id' => $this->user_id,
+            'exchange_good_id' => $this->exchange_good_id,
             'status' => $this->status,
-            'state' => $this->state,
-            'description' => $this->description,
-            'owner_id' => $this->owner_id,
-            'category_id' => $this->category_id,
+            'reject_reason' => $this->reject_reason,
+            'validated_at' => $this->validated_at,
+            'req_uuid' => $this->req_uuid,
+            'qr_code_svg' => $this->getQrCodeSvg(),
             'created_at' => $this->created_at,
         ];
+    }
+
+ protected function generateQrCodeSvgAsDataUri(): string
+    {
+        $svg = QrCode::format('svg')->size(300)->generate($this->req_uuid);
+        return 'data:image/svg+xml;base64,' . base64_encode($svg);
     }
 }

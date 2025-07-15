@@ -9,9 +9,9 @@ class GoodProposalRepository implements GoodProposalRepositoryInterface
         return GoodProposal::all();
     }
 
-    public function find($goodProposal)
+    public function find($good_proposal)
     {
-        return GoodProposal::findOrFail($goodProposal);
+        return GoodProposal::findOrFail($good_proposal->id);
     }
 
     public function create(array $data)

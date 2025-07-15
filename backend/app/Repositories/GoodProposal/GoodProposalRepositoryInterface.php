@@ -8,8 +8,8 @@ use App\Models\GoodProposal;
 interface GoodProposalRepositoryInterface
 {
     public function all();
-    public function find(GoodProposal $goodProposal);
+    public function find(GoodProposal $good_proposal);
     public function create(array $data);
-    public function update(GoodProposal $goodProposal, array $data);
-    public function delete(GoodProposal $goodProposal);
+    public function update(GoodProposal $good_proposal, array $data);
+    public function delete(GoodProposal $good_proposal);
 }

@@ -11,7 +11,7 @@ use App\Http\Controllers\v0\Features\VolunteerOpportunityController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::middleware('auth:sanctum')->prefix("admin")->group(
+Route::prefix("admin")->group(
     function () {
 
         Route::get("/", function () {

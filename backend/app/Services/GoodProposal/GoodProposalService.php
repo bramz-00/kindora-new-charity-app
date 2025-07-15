@@ -8,18 +8,16 @@ use App\Repositories\GoodProposal\GoodProposalRepositoryInterface;
 class GoodProposalService
 {
 
-    public function __construct(protected GoodProposalRepositoryInterface $repository)
-    {
-    }
+    public function __construct(protected GoodProposalRepositoryInterface $repository) {}
 
     public function all()
     {
         return $this->repository->all();
     }
 
-    public function find($goodProposal)
+    public function find($good_proposal)
     {
-        return $this->repository->find($goodProposal);
+        return $this->repository->find($good_proposal);
     }
 
     public function create(array $data)
@@ -36,7 +34,15 @@ class GoodProposalService
     {
         return $this->repository->delete($goodProposal);
     }
+
+
+
+    public function validate($proposal)
+    {
+        $proposal->validated_at = now();
+        $proposal->status = 'completed';
+        $proposal->save();
+        return $proposal;
+
+    }
 }
-
-
-
