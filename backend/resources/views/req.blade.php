@@ -5,5 +5,5 @@
 
 {{-- Affiche le QR code comme image SVG --}}
 <div>
-    {!! $proposal->qr_code_svg !!}
+    {!! $qr_code_svg !!}
 </div>
