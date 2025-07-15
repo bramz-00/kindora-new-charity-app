@@ -3,6 +3,7 @@
 use App\Http\Controllers\v0\Admin\UserController;
 use App\Http\Controllers\v0\Features\EventController;
 use App\Http\Controllers\v0\Features\GoodController;
+use App\Http\Controllers\v0\Features\GoodProposalController;
 use App\Http\Controllers\v0\Features\JackpotController;
 use App\Http\Controllers\v0\Features\OrganisationController;
 use App\Http\Controllers\v0\Features\ReviewController;
@@ -49,7 +50,9 @@ Route::middleware('auth:sanctum')->prefix("admin")->group(
         //Goods
         Route::apiResource('good', GoodController::class);
         Route::prefix('goods')->group(function () {});
-
+        //Good Proposals
+        Route::apiResource('good_proposal', GoodProposalController::class);
+        Route::prefix('good_proposals')->group(function () {});
         //Events
         Route::apiResource('event', EventController::class);
         Route::prefix('events')->group(function () {});
