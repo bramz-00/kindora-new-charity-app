@@ -49,4 +49,23 @@ class GoodProposalController extends Controller
             'message' => 'GoodProposal deleted successfully'
         ]);
     }
+
+
+
+      public function validateGoodProposal(GoodProposal $good)
+    {
+        $this->goodService->delete($good);
+        return response()->json([
+            'success' => true,
+            'message' => 'GoodProposal deleted successfully'
+        ]);
+    }
+        public function rejectGoodProposal(GoodProposal $good)
+    {
+        $this->goodService->delete($good);
+        return response()->json([
+            'success' => true,
+            'message' => 'GoodProposal deleted successfully'
+        ]);
+    }
 }

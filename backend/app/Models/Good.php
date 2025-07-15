@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Support\Str;
 class Good extends Model
 {
     /** @use HasFactory<\Database\Factories\GoodFactory> */
@@ -34,7 +34,7 @@ class Good extends Model
     protected static function booted()
     {
         static::creating(function ($good) {
-            $good->good_uuid = (string) \Str::uuid();
+            $good->good_uuid = (string) Str::uuid();
         });
     }
 }

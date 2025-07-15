@@ -52,7 +52,11 @@ Route::middleware('auth:sanctum')->prefix("admin")->group(
         Route::prefix('goods')->group(function () {});
         //Good Proposals
         Route::apiResource('good_proposal', GoodProposalController::class);
-        Route::prefix('good_proposals')->group(function () {});
+        Route::prefix('good_proposals')->group(function () {
+
+            Route::post('/{good_proposal}/reject', [GoodProposalController::class, 'rejectGoodProposal']);
+            Route::post('/{good_proposal}/validate', [GoodProposalController::class, 'validateGoodProposal']);
+        });
         //Events
         Route::apiResource('event', EventController::class);
         Route::prefix('events')->group(function () {});

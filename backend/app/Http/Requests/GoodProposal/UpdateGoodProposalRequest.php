@@ -3,6 +3,7 @@
 namespace App\Http\Requests\GoodProposal;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateGoodProposalRequest extends FormRequest
 {
