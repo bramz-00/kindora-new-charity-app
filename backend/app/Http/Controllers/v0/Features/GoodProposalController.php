@@ -9,6 +9,7 @@ use App\Http\Requests\GoodProposal\UpdateGoodProposalRequest;
 use App\Http\Resources\GoodProposalResource;
 use App\Models\GoodProposal;
 use App\Services\GoodProposal\GoodProposalService;
+use Illuminate\Http\Request;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class GoodProposalController extends Controller
@@ -73,16 +74,17 @@ class GoodProposalController extends Controller
 
 
 
-    public function rejectGoodProposal($id)
+    public function rejectGoodProposal(Request $request, $id)
     {
-     $proposal = GoodProposal::where('req_uuid', $id)->first();
+        $proposal = GoodProposal::where('req_uuid', $id)->first();
 
         if (!$proposal) {
-            return response()->json(['message' => 'Code invalide.'], 404);
+            return response()->json(['message' => 'invalid code.'], 404);
         }
-
-        $this->goodProposalService->reject($proposal);
-        return response()->json(['message' => 'GoodProposal rejeté avec succès.']);
-
+        $request->validate([
+            'reject_reason' => 'required|string|max:255',
+        ]);
+        $this->goodProposalService->reject($request, $proposal);
+        return response()->json(['message' => 'Good proposal rejeted with success.']);
     }
 }

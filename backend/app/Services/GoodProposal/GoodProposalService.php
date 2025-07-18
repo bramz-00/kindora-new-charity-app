@@ -3,7 +3,7 @@
 namespace App\Services\GoodProposal;
 
 use App\Repositories\GoodProposal\GoodProposalRepositoryInterface;
-
+use Illuminate\Http\Request;
 
 class GoodProposalService
 {
@@ -44,9 +44,10 @@ class GoodProposalService
         $proposal->save();
         return $proposal;
     }
-    public function reject($proposal)
+    public function reject($data, $proposal)
     {
         $proposal->validated_at = null;
+        $proposal->reject_reason=$data->input('reject_reason');
         $proposal->status = 'rejected';
         $proposal->save();
         return $proposal;
