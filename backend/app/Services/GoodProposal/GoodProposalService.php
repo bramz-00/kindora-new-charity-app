@@ -43,6 +43,12 @@ class GoodProposalService
         $proposal->status = 'completed';
         $proposal->save();
         return $proposal;
-
+    }
+    public function reject($proposal)
+    {
+        $proposal->validated_at = null;
+        $proposal->status = 'rejected';
+        $proposal->save();
+        return $proposal;
     }
 }

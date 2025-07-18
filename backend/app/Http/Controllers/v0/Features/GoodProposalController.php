@@ -73,12 +73,16 @@ class GoodProposalController extends Controller
 
 
 
-    public function rejectGoodProposal(GoodProposal $good)
+    public function rejectGoodProposal($id)
     {
-        $this->goodProposalService->delete($good);
-        return response()->json([
-            'success' => true,
-            'message' => 'GoodProposal deleted successfully'
-        ]);
+     $proposal = GoodProposal::where('req_uuid', $id)->first();
+
+        if (!$proposal) {
+            return response()->json(['message' => 'Code invalide.'], 404);
+        }
+
+        $this->goodProposalService->reject($proposal);
+        return response()->json(['message' => 'GoodProposal rejeté avec succès.']);
+
     }
 }

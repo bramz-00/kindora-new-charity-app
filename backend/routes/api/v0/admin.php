@@ -52,12 +52,13 @@ Route::prefix("admin")->group(
         Route::prefix('goods')->group(function () {});
         //Good Proposals
         Route::apiResource('good_proposal', GoodProposalController::class);
-        Route::prefix('good_proposals')->group(function () {
 
-            Route::post('/{good_proposal}/reject', [GoodProposalController::class, 'rejectGoodProposal']);
-            Route::post('/{good_proposal}/validate', [GoodProposalController::class, 'validateGoodProposal'])->name('good_proposals.validate');
+        Route::prefix('good_proposals')->group(function () {
+            Route::post('/reject/{id}', [GoodProposalController::class, 'rejectGoodProposal'])->name('good_proposals.reject');
+            Route::post('/validate/{id}', [GoodProposalController::class, 'validateGoodProposal'])->name('good_proposals.validate');
         });
         //Events
+
         Route::apiResource('event', EventController::class);
         Route::prefix('events')->group(function () {});
         Route::apiResource('event_order', EventController::class);

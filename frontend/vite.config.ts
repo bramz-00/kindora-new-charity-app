@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-import path from "path" 
+import path from "path"
 import tailwindcss from "@tailwindcss/vite"
 // https://vite.dev/config/
 export default defineConfig({
@@ -9,5 +9,9 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  server: {
+    port: 3000, // 👈 Port personnalisé ici
+    open: true, // optionnel : ouvre le navigateur automatiquement
   },
 })
