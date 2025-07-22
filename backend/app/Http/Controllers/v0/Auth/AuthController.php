@@ -8,6 +8,7 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Services\Auth\AuthService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -24,16 +25,43 @@ class AuthController extends Controller
         return new UserResource($user);
     }
 
-    public function login(LoginRequest $request)
+    // public function login(LoginRequest $request)
+    // {
+    //     $user = $this->auth->login($request);
+    //     return new UserResource($user);
+    // }
+
+    // public function logout(Request $request)
+    // {
+    //     $this->auth->logout($request);
+    //     return response()->json(['message' => 'Logged out']);
+    // }
+
+
+    public function login(Request $request)
     {
-        $user = $this->auth->login($request);
-        return new UserResource($user);
+        $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
+
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return response()->json(['message' => 'Invalid credentials'], 401);
+        }
+        $request->session()->regenerate();
+
+        // Sign in user
+        Auth::login(Auth::user());
+
+        return response()->json(['message' => 'Login successful', 'user' => new UserResource(Auth::user())], 200);
     }
 
     public function logout(Request $request)
     {
-        $this->auth->logout($request);
-        return response()->json(['message' => 'Logged out']);
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return response()->json(['message' => 'Logged out'], 200);
     }
 
     public function me(Request $request)
@@ -65,5 +93,4 @@ class AuthController extends Controller
         $this->auth->resetPassword($request);
         return response()->json(['message' => 'Password reset successful']);
     }
-
 }

@@ -1,10 +1,19 @@
 import Header from "@/components/layout/Header"
+import { useAuthStore } from "@/store/useAuthStore";
 
 const Home = () => {
+    const {user} = useAuthStore();
+  
   return (
 
     <div>
       <Header />
+      {user && (
+        <div className="text-center mt-4">
+          <h2 className="text-2xl font-bold">Welcome, {user.name || user.email}!</h2>
+          <p className="text-gray-600">You are logged in.</p>     
+        </div>
+      )}
 
       <section className="w-full  px-4 sm:px-8 md:px-10 lg:0px-20  lg:h-screen">
         <div

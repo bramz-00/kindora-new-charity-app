@@ -13,5 +13,9 @@ export default defineConfig({
   server: {
     port: 3000, // 👈 Port personnalisé ici
     open: true, // optionnel : ouvre le navigateur automatiquement
+     cors: {
+    origin: 'http://localhost:3000',
+    credentials: true,
+  },
   },
 })

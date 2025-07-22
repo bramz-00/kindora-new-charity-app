@@ -1,40 +1,68 @@
-// src/components/LoginForm.tsx
-import { login } from "@/services/authService";
+// src/pages/Login.tsx
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import api from "@/api/client";
 import { useAuthStore } from "@/store/useAuthStore";
-import { useState } from "react";
 
+const loginSchema = z.object({
+    email: z.string().email(),
+    password: z.string().min(6),
+});
 
-export default function LoginForm() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const setUser = useAuthStore((s) => s.setUser);
+type LoginForm = z.infer<typeof loginSchema>;
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+export default function Login() {
+    const setUser = useAuthStore((state) => state.setUser);
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+    } = useForm<LoginForm>({
+        resolver: zodResolver(loginSchema),
+    });
+
+    const onSubmit = async (data: LoginForm) => {
         try {
-            await login(email, password);
-            // fetch user again after login
-            const res = await fetch("http://localhost:8000/api/user", {
-                credentials: "include",
-            });
-            const user = await res.json();
-            setUser(user);
-        } catch (err) {
-            alert("Login failed");
+            await api.get("/sanctum/csrf-cookie");
+            const res = await api.post("/api/auth/login", data);
+            useAuthStore.getState().setUser(res.data.data);
+        } catch (error) {
+            console.error("Login error:", error);
         }
     };
 
     return (
-        <form onSubmit={handleSubmit} className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm space-y-6">
-            <input
-                className="block w-full rounded-t-md border-b-0 border-x border-t  bg-white px-3 py-2 text-lg text-gray-900   -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-md/6"
-
-                value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-            <input
-                className="block w-full rounded-b-md border bg-white px-3 py-2 text-lg text-gray-900   -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-md/6"
-                type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-            <button className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                type="submit">Login</button>
-        </form>
+        <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+            <Card className="w-full max-w-md p-6">
+                <CardContent>
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                        <div>
+                            <Input {...register("email")} placeholder="Email" />
+                            {errors.email && (
+                                <p className="text-sm text-red-500">{errors.email.message}</p>
+                            )}
+                        </div>
+                        <div>
+                            <Input
+                                {...register("password")}
+                                type="password"
+                                placeholder="Password"
+                            />
+                            {errors.password && (
+                                <p className="text-sm text-red-500">{errors.password.message}</p>
+                            )}
+                        </div>
+                        <Button type="submit" disabled={isSubmitting} className="w-full">
+                            {isSubmitting ? "Logging in..." : "Login"}
+                        </Button>
+                    </form>
+                </CardContent>
+            </Card>
+        </div>
     );
 }

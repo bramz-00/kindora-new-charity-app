@@ -1,10 +1,11 @@
 import GuestLayout from "@/layouts/GuestLayout"
 import logo from "../../../assets/images/logo/logo.png"
-const Login = () => {
+import Login from "./loginForm"
+const LoginPage = () => {
   return (
     <GuestLayout>
 
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-8 lg:px-8">
+      {/* <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-8 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <a href="#" className="flex items-center justify-center  ">
             <img
@@ -71,13 +72,13 @@ const Login = () => {
             </a>
           </p>
         </div>
-      </div>
+      </div> */}
 
 
-
+<Login/>
 
     </GuestLayout>
   )
 }
 
-export default Login
+export default LoginPage
