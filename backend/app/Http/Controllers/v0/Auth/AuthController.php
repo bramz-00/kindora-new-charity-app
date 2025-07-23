@@ -7,10 +7,8 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Services\Auth\AuthService;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+
 
 class AuthController extends Controller
 {
@@ -27,52 +25,23 @@ class AuthController extends Controller
         return new UserResource($user);
     }
 
-    // public function login(LoginRequest $request)
-    // {
-    //     $user = $this->auth->login($request);
-    //     return new UserResource($user);
-    // }
-
-    // public function logout(Request $request)
-    // {
-    //     $this->auth->logout($request);
-    //     return response()->json(['message' => 'Logged out']);
-    // }
-
-
-    // In your login method
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        // ... validation and authentication ...
+        $user = $this->auth->login($request);
 
-        if (!Auth::attempt($request->only('email', 'password'))) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
+        if (!$user) {
+            return response()->json(['message' => 'Identifiants invalides.'], 401);
         }
-
-        $request->session()->regenerate();
-        Auth::login(Auth::user());
-
-        Log::info('User in session after login: ' . json_encode(Auth::user())); // Add this
-        Log::info('Session ID: ' . $request->session()->getId()); // Add this
-
-        return response()->json(['message' => 'Login successful', 'user' => new UserResource(Auth::user())], 200);
+        return new UserResource($user);
     }
-
-
 
     public function logout(Request $request)
     {
-        $guard = Auth::guard();
-
-        if (method_exists($guard, 'logout')) {
-            $guard->logout();
-        }
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return response()->json(['message' => 'Déconnexion réussie']);
+        $this->auth->logout($request);
+        return response()->json(['message' => 'Logged out']);
     }
+
+
     public function me(Request $request)
     {
         $user = $this->auth->me($request);

@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
-use Str;
+use Illuminate\Support\Str;
+
 
 
 class AuthService
@@ -30,35 +31,30 @@ class AuthService
     }
 
 
-    public function login(LoginRequest $request): User
+    public function login(LoginRequest $request): ?User
     {
-        $user = User::where('email', $request->input('email'))->first();
-    
-        if (!$user) {
-            abort(404, 'Aucun utilisateur trouvé avec cet e-mail.');
+        $credentials = $request->only('email', 'password');
+
+        if (!Auth::attempt($credentials)) {
+            return null; // Let the controller handle the response
         }
-    
-        if (!Hash::check($request->input('password'), $user->password)) {
-            abort(401, 'Mot de passe incorrect.');
-        }
-    
-        // // Optionnel : vérifier si l'email est vérifié
-        // if (!$user->hasVerifiedEmail()) {
-        //     abort(403, 'Veuillez vérifier votre adresse e-mail.');
-        // }
-    
-        // Supprimer les anciens tokens si tu veux garder 1 session à la fois
-        $user->tokens()->delete();
-    
-        $user->token = $user->createToken('access_token')->plainTextToken;
-    
-        return $user;
+
+        $request->session()->regenerate();
+
+        return Auth::user();
     }
-    
+
 
     public function logout(Request $request): void
     {
-        $request->user()->currentAccessToken()->delete();
+        $guard = Auth::guard();
+
+        if (method_exists($guard, 'logout')) {
+            $guard->logout();
+        }
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
     }
 
     public function me(Request $request): User
@@ -117,6 +113,3 @@ class AuthService
         }
     }
 }
-
-
-
