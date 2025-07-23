@@ -8,10 +8,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // })->middleware('auth:sanctum');
 
-Route::middleware('auth:sanctum')->get('/user-load', function (Request $request) {
-    return response()->json([
-        'data' => $request->user()
-    ]);
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return  $request->user();
 });
 
 

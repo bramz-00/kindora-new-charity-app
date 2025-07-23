@@ -1,5 +1,5 @@
 import Header from "@/components/layout/Header"
-import { useAuthStore } from "@/store/useAuthStore";
+import { useAuthStore } from "@/store/auth";
 
 const Home = () => {
     const {user} = useAuthStore();

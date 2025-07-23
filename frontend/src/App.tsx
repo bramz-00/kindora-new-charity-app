@@ -1,31 +1,33 @@
-import './App.css'
-import { Routes, Route, Link } from 'react-router-dom';
-import Login from './pages/auth/login/Login';
-import Home from './pages/home/Home';
-import Register from './pages/auth/register/Register';
-import { useEffect } from 'react';
-import { loadUserFromSession } from './api/auth';
+import { useEffect } from 'react'
+import { useAuthStore } from './store/auth'
+import LoginPage from './pages/auth/login/Login'
+import ProtectedRoute from './routing/ProtectedRoutes'
+import DashboardPage from './pages/dashboard/Dashboard'
+import { Route, Routes } from 'react-router-dom'
+import Home from './pages/home/Home'
 
+export default function App() {
+  const { user, fetchUser } = useAuthStore()
 
-function App() {
-useEffect(() => {
-  loadUserFromSession();
-}, []);
+  useEffect(() => {
+    if (user ) {
+      fetchUser()
+    }
+  },[])
 
   return (
-    <>
-     
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/" element={<Home />} />
 
-    </>
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
   )
 }
-
-export default App
-
-
-

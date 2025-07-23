@@ -17,7 +17,7 @@ Route::prefix("auth")->group(
         Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->name('verification.verify');
         Route::post('/email/resend', [AuthController::class, 'resendVerificationEmail']);
 
-        Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+        Route::middleware(['auth:sanctum'])->group(function () {
             Route::get('/user', [AuthController::class, 'me']);
             Route::post('/logout', [AuthController::class, 'logout']);
         });

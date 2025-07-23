@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Services\Auth\AuthService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -61,12 +62,17 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        $guard = Auth::guard();
+
+        if (method_exists($guard, 'logout')) {
+            $guard->logout();
+        }
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return response()->json(['message' => 'Logged out'], 200);
-    }
 
+        return response()->json(['message' => 'Déconnexion réussie']);
+    }
     public function me(Request $request)
     {
         $user = $this->auth->me($request);
