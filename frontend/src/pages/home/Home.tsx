@@ -10,7 +10,7 @@ const Home = () => {
       <Header />
       {user && (
         <div className="text-center mt-4">
-          <h2 className="text-2xl font-bold">Welcome, {user.name || user.email}!</h2>
+          <h2 className="text-2xl font-bold">Welcome, {user.first_name || user.email}!</h2>
           <p className="text-gray-600">You are logged in.</p>     
         </div>
       )}

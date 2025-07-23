@@ -9,6 +9,7 @@ use App\Http\Resources\UserResource;
 use App\Services\Auth\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -38,23 +39,25 @@ class AuthController extends Controller
     // }
 
 
+    // In your login method
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
+        // ... validation and authentication ...
 
         if (!Auth::attempt($request->only('email', 'password'))) {
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
-        $request->session()->regenerate();
 
-        // Sign in user
+        $request->session()->regenerate();
         Auth::login(Auth::user());
+
+        Log::info('User in session after login: ' . json_encode(Auth::user())); // Add this
+        Log::info('Session ID: ' . $request->session()->getId()); // Add this
 
         return response()->json(['message' => 'Login successful', 'user' => new UserResource(Auth::user())], 200);
     }
+
+
 
     public function logout(Request $request)
     {

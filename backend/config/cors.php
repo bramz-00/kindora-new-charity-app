@@ -16,8 +16,11 @@ return [
     */
 
     
- 'paths' => ['api/*', 'sanctum/csrf-cookie', 'login', 'logout'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+
 'allowed_origins' => ['http://localhost:3000'],
+'allowed_origins_patterns' => ['http://localhost:3000'],
+
 'allowed_headers' => ['*'],
 'allowed_methods' => ['*'],
 'supports_credentials' => true,// Important pour l'auth

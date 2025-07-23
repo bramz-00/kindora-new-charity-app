@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import api from "@/api/client";
 import { useAuthStore } from "@/store/useAuthStore";
+import { loadUserFromSession } from "@/api/auth";
 
 const loginSchema = z.object({
     email: z.string().email(),
@@ -31,6 +32,7 @@ export default function Login() {
             await api.get("/sanctum/csrf-cookie");
             const res = await api.post("/api/auth/login", data);
             useAuthStore.getState().setUser(res.data.data);
+            await loadUserFromSession()
         } catch (error) {
             console.error("Login error:", error);
         }
