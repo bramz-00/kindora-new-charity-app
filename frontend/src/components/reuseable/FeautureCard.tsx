@@ -1,7 +1,7 @@
 
 const FeautureCard = () => {
     return (
-        <div className="grid grid-cols-3 gap-3 px-24 py-4">
+        <div className="grid lg:grid-cols-3 grid-cols-1 gap-3 lg:px-24 px-2 py-4">
             <div className="p-8 rounded-xl bg-[#794dff] text-[#794dff] -content">
                 <div className="text-white ">
                     <h5 className=" text-white mb-2.5">Customer Support</h5>

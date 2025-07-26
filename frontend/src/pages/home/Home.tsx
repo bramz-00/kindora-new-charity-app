@@ -53,6 +53,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <div className="space-y-10">
       <section className="lg:p-8  w-full flex gap-2 lg:px-24 px-14   flex-col items-start justify-start">
         <h1 className="text-4xl text-left border-b pb-2 w-full mb-16 text-blue-600 font-bold">Goods</h1>
         <div className="flex items-center justify-center w-full">
@@ -67,24 +68,26 @@ const Home = () => {
         </div>
       </section>
       <section className="lg:p-8  w-full flex gap-2 lg:px-24 px-14   flex-col items-start justify-start">
-        <h1 className="text-4xl text-left border-b pb-2 w-full mb-16 text-purple-400 font-bold">Jackpots</h1>
+        <h1 className="text-4xl text-left border-b pb-2 w-full mb-16 text-purple-500 font-bold">Volunteer Oppurtunity</h1>
         <div className="flex items-center justify-center w-full">
           <CarouselCard />
         </div>
       </section>
       <section className="lg:p-8  w-full flex gap-2 lg:px-24 px-14   flex-col items-start justify-start">
-        <h1 className="text-4xl text-left border-b pb-2 w-full mb-16 text-purple-400 font-bold">Jackpots</h1>
+        <h1 className="text-4xl text-left border-b pb-2 w-full mb-16 text-teal-700 font-bold">Jackpots</h1>
         <div className="flex items-center justify-center w-full">
           <CarouselCard />
 
 
         </div>
-        <div className="">
+      </section>
+
+      </div>
+        <div className="px-8">
 
           <FeautureCard />
-          <JackpotList/>
+          <JackpotList />
         </div>
-      </section>
     </div>
   )
 }
