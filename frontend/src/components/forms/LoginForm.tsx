@@ -38,7 +38,7 @@ export default function LoginForm({
             setLoading(true)
 
             // Simulate delay (e.g., 2 seconds)
-            await new Promise(resolve => setTimeout(resolve, 2000))
+            await new Promise(resolve => setTimeout(resolve, 500))
 
             await login(values)
             await fetchUser()

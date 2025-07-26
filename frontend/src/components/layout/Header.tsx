@@ -36,7 +36,7 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   return (
-    <header className={`sticky py-2 border-b items-center justify-between  bg-white backdrop-blur-2xl top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? " border-gray-200" : "border-white"
+    <header className={`sticky py-2 border-b items-center justify-between  top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? " border-gray-200 bg-white backdrop-blur-2xl" : "border-white bg-transparent"
       }`} >
       <nav aria-label="Top" className="mx-auto  px-4 sm:px-6 lg:px-12 ">
         <div className=" ">
@@ -56,22 +56,26 @@ export default function Header() {
             {/* Flyout menus */}
 
             <div className="ml-auto flex items-center">
-              <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                               <span aria-hidden="true" className="h-6 w-px bg-gray-200" />
+              <div className=" lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
 
-{user ?  <DropdownMenu>
+                {user ? <DropdownMenu modal={false}>
                   <DropdownMenuTrigger className="flex items-center justify-between gap-4 space-x-4 ">
-                    <span className="font-light text-primary capitalize g text-base cursor-pointer">
-                      {user?.first_name}  {user?.last_name}
-                    </span>
                     <Avatar className="h-12 w-12 ">
                       <AvatarImage src="https://github.com/shadcn.png" alt="@user" className="rounded-full " />
                       <AvatarFallback>JD</AvatarFallback>
                     </Avatar>
+                    <span aria-hidden="true" className="h-6 w-px bg-gray-200" />
+                    <span className="font-light text-primary uppercase g text-base cursor-pointer">
+                      {user?.first_name}  {user?.last_name}
+                    </span>
+
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="mt-4 lg:w-48 w-40 p-3 space-y-1 ">
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
+                         <DropdownMenuItem onClick={() => navigate("/admin")} className="px-3 mt-1">
+                            Admin
+                        </DropdownMenuItem>
                     <DropdownMenuItem asChild className="px-3 w-full hover:bg-gray-100 ">
                       <ConfirmDialog
                         onConfirm={() => handleLogout()}
@@ -86,13 +90,14 @@ export default function Header() {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-               
-               
-               : <Link  to="/login" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                  Sign in
-                </Link>}
-           
-               
+
+
+                  : <Link to="/login" className="inline-flex justify-center items-center gap-x-3 text-center bg-linear-to-tl from-violet-600 to-violet-600 hover:from-violet-600 hover:to-violet-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-hidden focus:from-violet-600 focus:to-violet-600 py-3 px-4">
+                    Sign in
+                  </Link>}
+                  
+
+
               </div>
 
 
