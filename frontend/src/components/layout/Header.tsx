@@ -61,7 +61,7 @@ export default function Header() {
                 {user ? <DropdownMenu modal={false}>
                   <DropdownMenuTrigger className="flex items-center justify-between gap-4 space-x-4 ">
                     <Avatar className="h-12 w-12 ">
-                      <AvatarImage src="https://github.com/shadcn.png" alt="@user" className="rounded-full " />
+                      <AvatarImage src="https://img.freepik.com/vecteurs-libre/cercle-bleu-utilisateur-blanc_78370-4707.jpg?t=st=1753541900~exp=1753545500~hmac=c4387f30e4fcbc1f1454782f58f61b204d4b05bae5b2e8d970468e9c1263f2b3&w=1380" alt="@user" className="rounded-full " />
                       <AvatarFallback>JD</AvatarFallback>
                     </Avatar>
                     <span aria-hidden="true" className="h-6 w-px bg-gray-200" />

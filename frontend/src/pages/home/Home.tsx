@@ -51,7 +51,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <div className="p-8  w-full flex gap-2 px-24   flex-col items-start justify-start">
+      <div className="lg:p-8  w-full flex gap-2 lg:px-24 px-14   flex-col items-start justify-start">
         <h1 className="text-4xl text-left border-b pb-2 w-full mb-16 text-blue-600 font-bold">Goods</h1>
         <div className="flex items-center justify-center w-full">
           <CarouselCard />
