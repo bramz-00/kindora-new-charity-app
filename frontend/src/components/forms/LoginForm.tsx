@@ -9,6 +9,8 @@ import { login } from '@/services/auth'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { Card, CardContent } from '../ui/card'
 import { cn } from '@/lib/utils'
+import { useState } from 'react'
+import { LoaderIcon } from 'lucide-react'
 
 const schema = z.object({
     email: z.string().email(),
@@ -19,6 +21,7 @@ export default function LoginForm({
     className,
     ...props
 }: React.ComponentProps<"div">) {
+    const [loading, setLoading] = useState(false)
 
     const form = useForm<z.infer<typeof schema>>({
         resolver: zodResolver(schema),
@@ -32,10 +35,17 @@ export default function LoginForm({
 
     const onSubmit = async (values: z.infer<typeof schema>) => {
         try {
+            setLoading(true)
+
+            // Simulate delay (e.g., 2 seconds)
+            await new Promise(resolve => setTimeout(resolve, 2000))
+
             await login(values)
             await fetchUser()
         } catch (error) {
             console.error(error)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -90,8 +100,8 @@ export default function LoginForm({
                                         </a>
                                     </div>
                                 </div>
-                                <Button type="submit" className="w-full">
-                                    Login
+                                <Button disabled={loading} type="submit">
+                                    {loading ? <LoaderIcon className="animate-spin" /> : 'Login'}
                                 </Button>
                                 <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                                     <span className="bg-card text-muted-foreground relative z-10 px-2">
