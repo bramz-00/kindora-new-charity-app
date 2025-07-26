@@ -48,7 +48,9 @@ Route::prefix("admin")->group(
 
 
         //Goods
-        Route::apiResource('good', GoodController::class);
+        Route::apiResource('good', GoodController::class)->except(['index'])->middleware('auth:sanctum');
+        Route::get('good', [GoodController::class,'index']);
+
         Route::prefix('goods')->group(function () {});
         //Good Proposals
         Route::apiResource('good_proposal', GoodProposalController::class);

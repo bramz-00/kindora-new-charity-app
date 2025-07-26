@@ -13,3 +13,20 @@ export interface User {
   joined_date: string
   token: string
 }
+export interface Good {
+  id: number
+  title: string
+  description: string
+  slug: string
+  good_uuid: string
+  state: string | null
+  is_active: boolean
+  status: boolean | number
+  exchange_condition: string
+  type: string 
+  created_at: string
+  joined_date: string
+  owner_id: User,
+  category_id:number
+}
+  

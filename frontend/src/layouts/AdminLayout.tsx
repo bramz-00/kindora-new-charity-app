@@ -7,7 +7,6 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { SectionCards } from "@/components/ui/section-cards"
 import { Separator } from "@/components/ui/separator"
 import {
     SidebarInset,
@@ -15,7 +14,7 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar"
 
-export default function Page() {
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
     return (
         <SidebarProvider>
             <AppSidebar />
@@ -37,18 +36,10 @@ export default function Page() {
                         </BreadcrumbList>
                     </Breadcrumb>
                 </header>
-                <div className="flex flex-1 flex-col gap-4 p-4">
-                    <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
 
-                        <SectionCards />
-                    </div>
-                    {Array.from({ length: 24 }).map((_, index) => (
-                        <div
-                            key={index}
-                            className="bg-muted/50 aspect-video h-12 w-full rounded-lg"
-                        />
-                    ))}
-                </div>
+
+                <main className="p-6">{children}</main>
+
             </SidebarInset>
         </SidebarProvider>
     )

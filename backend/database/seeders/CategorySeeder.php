@@ -33,5 +33,7 @@ class CategorySeeder extends Seeder
                 'is_active' => true,
             ]);
         }
+                // Category::factory()->count(10)->create();
+
     }
 }

@@ -73,7 +73,7 @@ export default function Header() {
                   <DropdownMenuContent align="end" className="mt-4 lg:w-48 w-40 p-3 space-y-1 ">
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                         <DropdownMenuItem onClick={() => navigate("/admin")} className="px-3 mt-1">
+                         <DropdownMenuItem onClick={() => navigate("/admin/dashboard")} className="px-3 mt-1">
                             Admin
                         </DropdownMenuItem>
                     <DropdownMenuItem asChild className="px-3 w-full hover:bg-gray-100 ">

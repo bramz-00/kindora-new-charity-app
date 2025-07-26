@@ -22,7 +22,9 @@ export default function App() {
       </Route>
         <Route path="/" element={<Home />} />
       <Route element={<ProtectedRoute />}>
-        <Route path="/admin" element={<Dashboard />} />
+        <Route path="/admin" >
+          <Route path="dashboard" element={<Dashboard />} />
+        </Route>
       </Route>
     </Routes>
   )
