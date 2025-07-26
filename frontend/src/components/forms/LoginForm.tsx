@@ -11,6 +11,8 @@ import { Card, CardContent } from '../ui/card'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import { LoaderIcon } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import logo from "@/assets/images/logo/logo.png"
 
 const schema = z.object({
     email: z.string().email(),
@@ -58,6 +60,14 @@ export default function LoginForm({
                         <form onSubmit={form.handleSubmit(onSubmit)} className="p-6 md:p-8">
                             <div className="flex flex-col gap-5">
                                 <div className="flex flex-col items-center text-center">
+                                    <Link to="/" className="flex items-center  ">
+                                        <img
+                                            alt=""
+                                            src={logo}
+                                            className="h-8 w-auto"
+                                        />
+                                        <span className="font-bold text-lg lg:block hidden    text-purple-600  border-purple-600 rounded-r  -ml-1.5 mt-4 border px-1.5 h-8">indora</span>
+                                    </Link>
                                     <h1 className="text-2xl font-bold">Welcome back</h1>
                                     <p className="text-muted-foreground text-balance">
                                         Login to your Acme Inc account

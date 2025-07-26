@@ -1,7 +1,9 @@
 import Header from "@/components/layout/Header"
 import { CarouselCard } from "@/components/reuseable/Carousel"
-import Page from "@/layouts/AdminLayout"
-import { Car } from "lucide-react"
+import FeautureCard from "@/components/reuseable/FeautureCard"
+import Jackpot from "@/components/reuseable/JackpotCard"
+import JackpotList from "../features/jackpots/JackpotList"
+
 
 const Home = () => {
 
@@ -51,14 +53,38 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <div className="lg:p-8  w-full flex gap-2 lg:px-24 px-14   flex-col items-start justify-start">
+      <section className="lg:p-8  w-full flex gap-2 lg:px-24 px-14   flex-col items-start justify-start">
         <h1 className="text-4xl text-left border-b pb-2 w-full mb-16 text-blue-600 font-bold">Goods</h1>
         <div className="flex items-center justify-center w-full">
           <CarouselCard />
         </div>
-      </div>
- 
+      </section>
 
+      <section className="lg:p-8  w-full flex gap-2 lg:px-24 px-14   flex-col items-start justify-start">
+        <h1 className="text-4xl text-left border-b pb-2 w-full mb-16 text-amber-400 font-bold">Events</h1>
+        <div className="flex items-center justify-center w-full">
+          <CarouselCard />
+        </div>
+      </section>
+      <section className="lg:p-8  w-full flex gap-2 lg:px-24 px-14   flex-col items-start justify-start">
+        <h1 className="text-4xl text-left border-b pb-2 w-full mb-16 text-purple-400 font-bold">Jackpots</h1>
+        <div className="flex items-center justify-center w-full">
+          <CarouselCard />
+        </div>
+      </section>
+      <section className="lg:p-8  w-full flex gap-2 lg:px-24 px-14   flex-col items-start justify-start">
+        <h1 className="text-4xl text-left border-b pb-2 w-full mb-16 text-purple-400 font-bold">Jackpots</h1>
+        <div className="flex items-center justify-center w-full">
+          <CarouselCard />
+
+
+        </div>
+        <div className="">
+
+          <FeautureCard />
+          <JackpotList/>
+        </div>
+      </section>
     </div>
   )
 }
