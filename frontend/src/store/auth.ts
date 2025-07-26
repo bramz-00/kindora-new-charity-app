@@ -14,7 +14,7 @@ interface AuthStore {
 
 export const useAuthStore = create<AuthStore>((set) => ({
   user: null,
-  loading: false,
+  loading: true,
   error: null,
 
   setUser: (user) => set({ user }),
@@ -25,10 +25,16 @@ export const useAuthStore = create<AuthStore>((set) => ({
       const user = await getUser()
       set({ user, loading: false })
     } catch (error: any) {
-      console.warn('Utilisateur non authentifié')
-      set({ user: null, loading: false, error: 'Utilisateur non connecté' })
+      if (error.response?.status === 401) {
+        console.info('Non connecté')
+      } else {
+        console.error('Erreur fetchUser', error)
+      }
+      set({ user: null, loading: false })
     }
   },
+
+
 
   logout: async () => {
     set({ loading: true, error: null })

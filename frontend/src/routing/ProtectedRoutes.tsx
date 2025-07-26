@@ -1,31 +1,19 @@
-import { useAuthStore } from '@/store/auth'
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useAuthStore } from '@/store/auth';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
-export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const user = useAuthStore((state) => state.user)
-  const fetchUser = useAuthStore((state) => state.fetchUser)
-  const [loading, setLoading] = useState(true)
-  const navigate = useNavigate()
+export function ProtectedRoute() {
+const { user, loading } = useAuthStore();
+  const location = useLocation();
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      await fetchUser()
-      setLoading(false)
-    }
-    checkAuth()
-  }, [])
-
-  useEffect(() => {
-    if (!loading && !user) {
-      navigate('/login')
-    }
-  }, [loading, user])
-
-  if (loading) return <p>Chargement...</p>
-
-  return <>{children}</>
+if (loading) {
+  return <div>Loading...</div>; // or your spinner component
 }
 
+if (!user) {
+  return <Navigate to="/login" state={{ from: location }} replace />;
+}
+
+return <Outlet />;
+}
 
 

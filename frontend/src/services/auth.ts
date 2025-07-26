@@ -1,5 +1,5 @@
 import api from "@/api/client"
-import type { User } from "@/types/admin"
+import { useAuthStore } from "@/store/auth"
 
 
 /**
@@ -27,7 +27,10 @@ export interface RegisterPayload {
  */
 export const getUser = async () => {
   const response = await api.get('/api/auth/user')
-  return response.data.data 
+  const user = response.data.data
+  useAuthStore.getState().setUser(user) // remplis Zustand
+
+  return user
 }
 
 /**
@@ -35,9 +38,11 @@ export const getUser = async () => {
  * Laravel envoie le cookie HTTP-only automatiquement
  */
 export const login = async (credentials: LoginCredentials): Promise<void> => {
-  await api.get('/sanctum/csrf-cookie') // obligatoire avant login avec Sanctum
+  await api.get('/sanctum/csrf-cookie')
   await api.post('/api/auth/login', credentials)
-    await getUser() // Charge l'utilisateur connecté après le login
+  
+  const user = await getUser() // maintenant connecté
+  useAuthStore.getState().setUser(user) // remplis Zustand
 }
 
 /**
