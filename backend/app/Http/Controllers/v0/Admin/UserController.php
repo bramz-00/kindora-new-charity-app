@@ -12,6 +12,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\User\UserService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
@@ -199,11 +200,12 @@ class UserController extends Controller
     /**
      * Update user profile
      */
-    public function updateProfile(UpdateProfileRequest $request, int $id): JsonResponse
+    public function updateProfile(UpdateProfileRequest $request): JsonResponse
     {
         try {
-            $result = $this->userService->updateProfile($id, $request->validated());
-            
+            $user = Auth::user();
+            $result = $this->userService->updateProfile($user, $request->validated());
+
             if (!$result) {
                 return response()->json([
                     'success' => false,
@@ -211,7 +213,6 @@ class UserController extends Controller
                 ], 404);
             }
             
-            $user = $this->userService->getUserById($id);
             
             return response()->json([
                 'success' => true,

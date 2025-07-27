@@ -1,5 +1,7 @@
 import api from "@/api/client"
 import { useAuthStore } from "@/store/auth"
+import type { User } from "@/types/admin"
+import { toast } from "sonner"
 
 
 /**
@@ -60,3 +62,16 @@ export const register = async (payload: RegisterPayload): Promise<void> => {
 export const logout = async (): Promise<void> => {
   await api.post('/api/auth/logout')
 }
+
+
+
+
+export const updateProfile = async (data: Partial<User>) => {
+  try {
+    await api.put(`/api/admin/users/profile/update`, data);
+    toast.success('Good updated');
+    await getUser()
+  } catch (err) {
+    toast.error('Failed to update good');
+  }
+};

@@ -6,6 +6,7 @@ import Home from './pages/home/Home'
 import { GuestRoute } from './routing/GuestRoute'
 import { ProtectedRoute } from './routing/ProtectedRoutes'
 import Dashboard from './pages/admin/dashboard/index'
+import Profile from './pages/admin/profile/Profile'
 
 export default function App() {
   const { fetchUser } = useAuthStore()
@@ -24,6 +25,9 @@ export default function App() {
       <Route element={<ProtectedRoute />}>
         <Route path="/admin" >
           <Route path="dashboard" element={<Dashboard />} />
+        </Route>
+          <Route path="/user" >
+          <Route path="profile" element={<Profile />} />
         </Route>
       </Route>
     </Routes>

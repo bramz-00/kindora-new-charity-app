@@ -187,18 +187,18 @@ class UserService
     /**
      * Update user profile
      */
-    public function updateProfile(int $id, array $data): bool
+    public function updateProfile(User $user, array $data): bool
     {
         DB::beginTransaction();
         try {
             // Handle avatar upload if present
             if (isset($data['avatar']) && $data['avatar']) {
-                $data['avatar_path'] = $this->handleAvatarUpload($data['avatar'], $id);
+                $data['avatar_path'] = $this->handleAvatarUpload($data['avatar'], $user->id);
                 unset($data['avatar']);
             }
 
-            $result = $this->userRepository->updateProfile($id, $data);
-            
+            $result = $this->userRepository->updateProfile($user->id, $data);
+
             DB::commit();
             return $result;
         } catch (\Exception $e) {

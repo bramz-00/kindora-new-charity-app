@@ -60,7 +60,7 @@ export default function Header() {
 
                 {user ? <DropdownMenu modal={false}>
                   <DropdownMenuTrigger className="flex items-center justify-between gap-4 space-x-4 ">
-                    <span className="font-bold text-black font-sans uppercase g text-base cursor-pointer">
+                    <span className="font-medium text-gray-500 font-sans uppercase g text-base cursor-pointer">
                       {user?.first_name}  {user?.last_name}
                     </span>
                     <span aria-hidden="true" className="h-6 w-px bg-gray-200" />
@@ -75,6 +75,9 @@ export default function Header() {
                     <DropdownMenuSeparator />
                          <DropdownMenuItem onClick={() => navigate("/admin/dashboard")} className="px-3 mt-1">
                             Admin
+                        </DropdownMenuItem>
+                           <DropdownMenuItem onClick={() => navigate("/user/profile")} className="px-3 mt-1">
+                            Profile
                         </DropdownMenuItem>
                     <DropdownMenuItem asChild className="px-3 w-full hover:bg-gray-100 ">
                       <ConfirmDialog
