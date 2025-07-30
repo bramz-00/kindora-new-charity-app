@@ -19,15 +19,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
 
-        $middleware->priority([
-            StartSession::class,
-            ShareErrorsFromSession::class,
-            ThrottleRequests::class,
-            SubstituteBindings::class,
-        ]);
+     
         $middleware->statefulApi();
-        $middleware->validateCsrfTokens(['/api/*']);
-    })
+})
     ->withExceptions(function (Exceptions $exceptions) {
         CustomExceptionHandlers::register($exceptions);
     })->create();
