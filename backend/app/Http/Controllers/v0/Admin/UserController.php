@@ -20,6 +20,8 @@ class UserController extends Controller
 
     public function __construct(protected UserService $userService)
     {
+        $this->middleware(['role_or_permission:super-admin|edit users'])->except(['index', 'show', 'updateProfile', 'changePassword', 'activate', 'deactivate', 'toggleStatus', 'search', 'getActiveUsers', 'getInactiveUsers', 'bulkActivate', 'bulkDeactivate', 'getStats']);
+        $this->middleware(['role_or_permission:super-admin|view users'])->only(['index', 'show']);
     }
 
     /**

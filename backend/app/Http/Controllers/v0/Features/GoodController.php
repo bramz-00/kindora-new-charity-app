@@ -18,9 +18,8 @@ class GoodController extends Controller
 
     public function index()
     {
-  
-        return GoodResource::collection($this->goodService->all());
 
+        return GoodResource::collection($this->goodService->all());
     }
 
     public function store(StoreGoodRequest $request)
