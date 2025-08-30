@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import { LoaderIcon } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import logo from "@/assets/images/logo/logo.png"
+import logo from "@/assets/images/logo/logo-light.svg"
 
 const schema = z.object({
     email: z.string().email(),
@@ -64,9 +64,8 @@ export default function LoginForm({
                                         <img
                                             alt=""
                                             src={logo}
-                                            className="h-8 w-auto"
+                                            className="h-12 w-auto"
                                         />
-                                        <span className="font-bold text-lg lg:block hidden    text-purple-600  border-purple-600 rounded-r  -ml-1.5 mt-4 border px-1.5 h-8">indora</span>
                                     </Link>
                                     <h1 className="text-2xl font-bold">Welcome back</h1>
                                     <p className="text-muted-foreground text-balance">

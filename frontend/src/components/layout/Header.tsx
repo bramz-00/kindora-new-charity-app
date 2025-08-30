@@ -1,6 +1,6 @@
 
 import { Link, useNavigate } from "react-router-dom"
-import logo from "../../assets/images/logo/logo.png"
+import logo from "../../assets/images/logo/logo-light.svg"
 import { useEffect, useState } from "react";
 import { useAuthStore } from "@/store/auth";
 import {
@@ -47,9 +47,8 @@ export default function Header() {
                 <img
                   alt=""
                   src={logo}
-                  className="h-8 w-auto"
+                  className="h-12 w-auto"
                 />
-                <span className="font-bold text-lg lg:block hidden    text-blue-600  border-blue-600 rounded-r  -ml-1.5 mt-4 border px-1.5 h-8">indora</span>
               </Link>
             </div>
 
@@ -95,7 +94,7 @@ export default function Header() {
                 </DropdownMenu>
 
 
-                  : <Link to="/login" className="inline-flex justify-center items-center gap-x-3 text-center bg-linear-to-tl from-violet-600 to-violet-600 hover:from-violet-600 hover:to-violet-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-hidden focus:from-violet-600 focus:to-violet-600 py-3 px-4">
+                  : <Link to="/login" className="inline-flex justify-center items-center gap-x-3 text-center text-primary hover:bg-primary/90 hover:text-white duration-200 transition-all ease-in bg-white border border-primary text-sm font-medium  py-2 px-4">
                     Sign in
                   </Link>}
                   
