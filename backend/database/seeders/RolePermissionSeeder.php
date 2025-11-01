@@ -24,7 +24,7 @@ class RolePermissionSeeder extends Seeder
         $userRole->givePermissionTo($viewPermission);
 
         // Assign role to user
-        $user = User::where('email', 'john@dd.com')->first();
-        $user->assignRole('super-admin');
+        // $user = User::where('email', 'john@dd.com')->first();
+        // $user->assignRole('super-admin');
     }
 }

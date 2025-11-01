@@ -104,4 +104,21 @@ class User extends Authenticatable
     // {
     //     return $this->role === 'admin';
     // }
+/**
+ * Get the user's full name.
+ */
+public function getNameAttribute(): string
+{
+    $name = trim("{$this->first_name} {$this->last_name}");
+    
+    return $name ?: ($this->email ?? 'User');
+}
+
+/**
+ * Get the user's name for Filament.
+ */
+public function getFilamentName(): string
+{
+    return $this->name; // This will use the accessor above
+}
 }
