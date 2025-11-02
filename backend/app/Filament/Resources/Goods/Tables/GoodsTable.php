@@ -52,8 +52,9 @@ class GoodsTable
                 TrashedFilter::make(),
             ])
             ->recordActions([
-                EditAction::make(),
-            ])
+                EditAction::make()
+                ->label('Modifier')
+                ->icon('heroicon-o-pencil-square'),            ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
