@@ -17,31 +17,10 @@ use Illuminate\Support\Str;
 class AuthService
 {
 
-    public function register(RegisterRequest $request): User
+    public function register(array $data): User
     {
-        $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
-        $user->token = $user->createToken('access_token')->plainTextToken;
-        $user->sendEmailVerificationNotification();
+        $user = User::create($data);
         return $user;
-    }
-
-
-    public function login(LoginRequest $request): ?User
-    {
-        $credentials = $request->only('email', 'password');
-
-        if (!Auth::attempt($credentials)) {
-            return null; // Let the controller handle the response
-        }
-
-        $request->session()->regenerate();
-
-        return Auth::user();
     }
 
 

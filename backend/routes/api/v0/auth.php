@@ -18,7 +18,7 @@ Route::prefix("auth")->group(
         Route::post('/email/resend', [AuthController::class, 'resendVerificationEmail']);
 
         Route::middleware(['auth:sanctum'])->group(function () {
-            Route::get('/user', [AuthController::class, 'me']);
+            Route::get('/me', [AuthController::class, 'me']);
             Route::post('/logout', [AuthController::class, 'logout']);
         });
     }

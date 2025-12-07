@@ -1,6 +1,6 @@
 
 import { Link, useNavigate } from "react-router-dom"
-import logo from "../../assets/images/logo/logo-light.svg"
+import logo from "@/assets/images/logo/logo-light.svg"
 import { useEffect, useState } from "react";
 import { useAuthStore } from "@/store/auth";
 import {

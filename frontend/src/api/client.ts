@@ -3,17 +3,14 @@ const baseURL = import.meta.env.VITE_API_BASE_URL_TEST || "http://localhost:8000
 
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000',
-    withCredentials: true,
-    withXSRFToken: true,
-
+  baseURL: baseURL,
+  withCredentials: true,
+  withXSRFToken: true,
   headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      }
-  // le nom de l'en-tête envoyé à Laravel
-
+    "X-Requested-With": "XMLHttpRequest",
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
 });
 
 export default api;
