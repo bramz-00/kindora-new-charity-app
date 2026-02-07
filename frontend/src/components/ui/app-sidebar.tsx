@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   AudioWaveform,
   BookOpen,
@@ -12,8 +12,7 @@ import {
   PieChart,
   Settings2,
   SquareTerminal,
-} from "lucide-react"
-
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -25,10 +24,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
-import { NavMain } from "./nav.main"
-import { NavUser } from "./nav-user"
-import { Link } from "react-router-dom"
+} from "@/components/ui/sidebar";
+import { NavMain } from "./nav.main";
+import { NavUser } from "./nav-user";
+import { Link } from "react-router-dom";
 
 // This is sample data.
 const data = {
@@ -158,7 +157,7 @@ const data = {
       icon: Map,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -167,7 +166,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <Link to={'/'}>
+              <Link to={"/"}>
                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                   <Command className="size-4" />
                 </div>
@@ -183,9 +182,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

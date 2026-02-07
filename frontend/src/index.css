@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import '@fontsource-variable/bricolage-grotesque';
-
+@import '@fontsource-variable/archivo';
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -117,7 +117,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Bricolage Grotesque Variable', sans-serif;
+      font-family: 'Archivo Variable', sans-serif;
 
   }
 }
